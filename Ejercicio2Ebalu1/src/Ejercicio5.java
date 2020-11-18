@@ -16,7 +16,7 @@ public class Ejercicio5 {
 		while (num>0) {
 			dig=num%10;
 
-			if(dig%2==0) {
+			if(dig%dig==0) {
 				multi=multi*dig;
 				num/=10;
 			}
