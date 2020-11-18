@@ -1,0 +1,20 @@
+
+public class ArrayContar {
+
+	public static void main(String[] args) {
+		//LLENAR UN ARRAY DE 30 ELEMENTOS CON NUMEROS ALEATORIOS POSITIVOS MENORES QUE 1000
+		//MOSTAR EL ARRAY ENTERO, 10 NUMEROS POR FILA SEPARADOS POR * *
+		// A CONTINUACION, MOSTRAR, CONTAR Y SUMAR LOS NUMEROS PARES DEL ARRAY
+		
+		//DECLARACION
+		int var;
+		//LLENAR EL ARRAY CON NUMEROS ALEATORIOS
+		
+		var = (int) (Math.random()*101+100);
+		
+		//NUMEROS ALEATORIOS
+		int var2=(int) (Math.random()*101+100);
+
+	}
+
+}

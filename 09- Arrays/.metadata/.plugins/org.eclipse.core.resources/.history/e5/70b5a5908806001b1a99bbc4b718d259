@@ -1,0 +1,22 @@
+
+public class numeros100 {
+
+	public static void main(String[] args) {
+		// PROGRAMA QUE MUESTRE POR PANTALLA DOS NUMEROS DEL 1 AL 3000 SEPARADOS POR UN -
+
+		// VARIABLES
+		int cont;
+		cont-1;
+		while (cont<-300) {
+			if (cont%15!=0)
+			System.out.print(",");
+			if (cont%15==0)
+				System.out.println();
+		}
+
+
+		//SI EL NUMERO ESCRITO ES MULTIPLO DE 15 ESCRIBIMOS UN SALTO DE LINEA
+		// cont=cont+1 (cont+=1)
+	}
+
+}

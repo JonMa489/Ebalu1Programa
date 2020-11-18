@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class ContarPosNeg {
+
+	@SuppressWarnings("resource")
+	public static void main(String[] args) {
+		//PROGRAMA QUE LEA 15 NUMEROS POR TECLADO Y AL FINAL NOS DIGA CUANTOS ERAN
+		//POSITIVOS, CUANTOS NEGATIVOS Y CUANTOS VALIAN 0
+
+
+		Scanner se;
+		se=new Scanner(System.in);
+
+		//VARIABLES
+		int num = 0, cont = 0, contpos=0, contneg=0, contCero=0;
+
+		while(cont<15) {
+			cont++;
+			System.out.print("Introduce nº "+cont+": ");
+			num=se.nextInt();
+			if(num>0) {
+				contpos++;
+			}else if(num<0) {
+					contneg++;
+				}else {
+					contCero++;
+				}
+
+
+
+
+
+		System.out.println("RESULTADOS: POTISIVOS;"+ contpos +  ", NEGATIVOS;"+ contneg+", CEROS:"+ contCero);
+
+
+
+
+
+	}
+	}
+}

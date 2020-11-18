@@ -1,0 +1,50 @@
+
+public class ArrayContar {
+
+	public static void main(String[] args) {
+		//LLENAR UN ARRAY DE 30 ELEMENTOS CON NUMEROS ALEATORIOS POSITIVOS MENORES QUE 100
+		//MOSTAR EL ARRAY ENTERO, 10 NUMEROS POR FILA SEPARADOS POR * *
+		// A CONTINUACION, MOSTRAR, CONTAR Y SUMAR LOS NUMEROS PARES DEL ARRAY
+
+		//DECLARACION
+		int par = 0;
+		int [] numeros;
+		numeros=new int [30];
+		//LLENAR EL ARRAY CON NUMEROS ALEATORIOS
+		for (int cont= 0; cont <numeros.length; cont++) {
+			numeros[cont] = (int) (Math.random()*99+1);
+
+
+			if (cont%10==0 && cont!=0) {
+				System.out.println(" ");
+				
+
+			}
+			if (numeros[cont]%2==0) {
+				
+				par= numeros[cont]+ par;
+				
+			}
+			System.out.print(" "+numeros[cont]+" ");
+
+		}
+
+		//CONTAR=SUMAR Y MOSTRAR LOS NUMEROS PARES
+
+	
+		
+		System.out.println("\n La suma de numeros par son:"+par);
+		
+
+
+
+
+
+
+
+		//NUMEROS ALEATORIOS 100-200
+		//int var2=(int) (Math.random()*101+100);
+		//System.out.println(var);
+	}
+
+}

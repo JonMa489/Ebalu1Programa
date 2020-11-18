@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Factorial {
+
+	public static void main(String[] args) {
+		// LEER NUMERO ENTEROS POR TECLADO HASTA QUE SE TECLEA UN NUMERO NEGATIVO
+		//PARA CADA NUMERO SE MOSTRARA POR PANTALLA EL FACTORIAL DE DICHO NUMERO
+		//num-> Entero
+		// resultado (Factorial) -> double
+		// FACTORIAL: 7!=7*6*5*4*3*2*1
+		//num!=num*(num-1)*(num-2)*(num-3)*.....*3*2*1
+
+		Scanner se;
+		se=new Scanner(System.in);
+
+		int num, cont;
+		double fact = 0;
+		
+		System.out.println("Introduce un numero:");
+		num=se.nextInt();
+		
+		fact=1;
+		if (num>=0) {
+			for (cont = num; cont>= num ; cont--) {
+				fact=fact*cont;
+			}
+		}
+		
+		System.out.println(cont+"");
+		while (num>0);
+
+		//
+
+
+	}
+
+}

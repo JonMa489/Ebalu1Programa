@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class ParesImpares {
+
+	public static void main(String[] args) {
+		//PROGRAMA QUE MUESTRE EL SIGUIENTE MENU POR PANTALLA
+		/*
+		 * 	SUMAR PARES
+		 * 	SUMAR IMPARES
+		 * 	SUMAR TODOS
+		 *  FIN DE PROGRAMA
+		 *  UNA VEZ ELEGIDA LA OPINION EL PROGRAMA REALIZARA LA OPERACION CORRESPONDIENTE CON LOS NUMEROS INTRODUCIDOS POR TECLADO HASTA QUE SE TECLEE EL NUMERO EN EL QUE MOSTRARA EL RESULTADO
+		 *  
+		 * 
+		 */
+		//VARIABLES
+		int par,impar,todos;
+		Scanner se;
+		se=new Scanner(System.in);
+		
+		System.out.println("Elige una de estas opciones:");
+		
+		System.out.println("Sumar todos los numeros pares");
+		par=se.nextInt();
+		
+		System.out.println("Sumar todos los numeros impares");
+		impar=se.nextInt();
+		
+		System.out.println("Sumar todos los numeros");
+		todos=se.nextInt();
+		
+		
+	}
+
+}

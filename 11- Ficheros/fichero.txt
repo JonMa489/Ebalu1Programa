@@ -1,0 +1,6 @@
+Hola a todos
+Estamos en clase de programacion
+Este es un ejercicio de mostrar un fichero
+
+
+Jon
