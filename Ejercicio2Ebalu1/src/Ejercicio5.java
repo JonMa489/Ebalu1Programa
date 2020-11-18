@@ -8,7 +8,7 @@ public class Ejercicio5 {
 		@SuppressWarnings({ "unused", "resource" })
 		Scanner sc=new Scanner(System.in);
 		//VARIABLES
-		int num,dig = 0, multi = 0;
+		int num,dig = 1, multi = 1, impar=1;
 		System.out.println("------Multiplicacion de numeros impares------");
 		System.out.println("Introduzca el numero: ");
 		num=sc.nextInt();
@@ -16,12 +16,15 @@ public class Ejercicio5 {
 		while (num>0) {
 			dig=num%10;
 
-			if (dig%2==0) {
-				multi=multi+dig;
+			if(dig%2==0) {
+				
+			}else {
+				multi=multi*dig;
+				num/=10;
 			}
-			num/=10;
+			
+			System.out.println("La multiplicacion es: "+ impar);
 		}
-		System.out.println("La multiplicacion es: "+ multi);
 	}
 }
 
