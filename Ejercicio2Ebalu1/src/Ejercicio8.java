@@ -16,6 +16,7 @@ public class Ejercicio8 {
 		//	â—� 	FunciÃ³n para mostrarlos en el siguiente orden: el primero, el Ãºltimo, el
 		//		segundo, el penÃºltimo, el tercero, etc.
 		llenarArray(numeros);
+		mostrar(numeros);
 		numeros=numeros1;
 		if (numeros.length == numeros1.length) {
 			orden(numeros,numeros1,0);
@@ -27,11 +28,12 @@ public class Ejercicio8 {
 	public static void llenarArray  (int[]numeros) {
 		for (int i = 0; i < numeros.length; i++) {
 			numeros[i]=(int)(Math.random()*49+1);
-			System.out.print(numeros[i]+ "-");
 		}
 	}
-	public static void mostrar () {
-
+	public static void mostrar (int[]numeros) {
+		for  (int i= 0; i <numeros.length; i++) {
+			System.out.print(numeros[i]+" ");
+		}
 	}
 	public static boolean orden (int numeros[], int numeros1[], int indice) {
 		if (indice == numeros.length) {

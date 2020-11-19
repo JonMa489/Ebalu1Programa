@@ -55,16 +55,16 @@ public class Ejercicio4 {
 				limitesDias=31;
 				break;
 			case 8: //AGOSTO
-
+				limitesDias=31;
 				break;
 			case 9: //SEPTIEMBRE
-
+				limitesDias=30;
 				break;
 			case 10: //OCTUBRE
-
+				limitesDias=31;
 				break;
 			case 11: //NOVIEMBRE
-
+				limitesDias=30;
 				break;
 			case 12: //DICIEMBRE
 				limitesDias=31;
