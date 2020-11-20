@@ -19,8 +19,11 @@ public class Ejercicio7 {
 				System.out.println();
 			}
 			System.out.println();
-			for (int i = 0; i < args.length; i++) {
-
+			for (int i = 1; i <= num; i++) {
+				for (int j = i; j >= 1; j--) {
+					System.out.print(j + " ");
+				}
+				System.out.println();
 			}
 			System.out.println();
 			for (int i = num; i >= 1; i--) {

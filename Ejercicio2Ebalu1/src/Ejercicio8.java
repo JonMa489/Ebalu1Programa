@@ -3,10 +3,9 @@ import java.util.Scanner;
 public class Ejercicio8 {
 
 	public static void main(String[] args) {
-		@SuppressWarnings("resource")
+		@SuppressWarnings({ "resource", "unused" })
 		Scanner sc=new Scanner(System.in);
 		int[] numeros = new int[10];
-		int[] numeros1 = new int[10];
 		// 	Programa que mediante llamadas a funciones llene un array, lo muestre con su
 		//	contenido y despuÃ©s lo muestre por pantalla tal y como se indica en la otra
 		//	funciÃ³n:
@@ -17,13 +16,9 @@ public class Ejercicio8 {
 		//		segundo, el penÃºltimo, el tercero, etc.
 		llenarArray(numeros);
 		mostrar(numeros);
-		numeros=numeros1;
-		if (numeros.length == numeros1.length) {
-			orden(numeros,numeros1,0);
-		}else {
-			System.out.println(false);
-		}
-		
+		System.out.println();
+		orden(numeros);
+
 	}
 	public static void llenarArray  (int[]numeros) {
 		for (int i = 0; i < numeros.length; i++) {
@@ -35,14 +30,21 @@ public class Ejercicio8 {
 			System.out.print(numeros[i]+" ");
 		}
 	}
-	public static boolean orden (int numeros[], int numeros1[], int indice) {
-		if (indice == numeros.length) {
-			return true;
-		}else if (numeros[indice] != numeros[indice]) {
-			return false;
-		}else {
-			return orden(numeros,numeros1,indice+1);
+	public static void orden (int numeros[]) {
+		int aux;
+		for (int i = 0; i < numeros.length; i++) {
+			for (int j = i + 1; j < numeros.length; j++) {
+
+				if (numeros[i] numeros[j]) {
+					aux = numeros[i];
+					numeros[i] = numeros[j];
+					numeros[j] = aux;
+
+				}
+			}
 		}
-			
+		for (int i1= 0; i1 <numeros.length; i1++) {
+			System.out.print(numeros[i1]+" ");
+		}
 	}
 }
