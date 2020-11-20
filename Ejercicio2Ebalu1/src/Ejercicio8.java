@@ -35,11 +35,10 @@ public class Ejercicio8 {
 		for (int i = 0; i < numeros.length; i++) {
 			for (int j = i + 1; j < numeros.length; j++) {
 
-				if (numeros[i] numeros[j]) {
+				if (numeros[i] < numeros[j]) {
 					aux = numeros[i];
 					numeros[i] = numeros[j];
 					numeros[j] = aux;
-
 				}
 			}
 		}
