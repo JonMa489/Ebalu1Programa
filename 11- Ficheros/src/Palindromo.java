@@ -1,92 +1,149 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+
 public class Palindromo {
-	@SuppressWarnings("resource")
-	public static void main(String[] args) { 
-		// PROGRAMA QUE LEA UNA FRASE POR TECLADO
-		// UTILIZANDO UNA LLAMADA A LA FUNCION PALINDROMO, GUARDARA LA FRASE EN UN ARCHIVO
-		// AÑADIENDO AL FINAL DE LA FRASE"--> SI ES PALINDROMO" O "-->NO ES PALINDROMO"
-		// DEPENDIENDO DE SI LA FRASE ES PALINDROMO O NO
-		/*EJEMPLO
-		 * 	SARA BARAS
-		 * 	Es palindromo
-		 * 	Hola a todos no es palindromo
-		 */
-		//PrintWriter pw;
-		//pw=new PrintWriter(new File("fichero.txt"));
-		Scanner sc;
+
+	public static void main(String[] args) {
+		//PROGRAMA QUE LEA UNA FRASE POR TECLADO
+		//UTILIZANDO UNA LLAMADA A LA FUNCIÓN PALINDROMO, muestre un mensaje por pantalla
+		//indicando si la frase es palindromo o no
+		/*Scanner sc;
+		String frase;
 		sc=new Scanner(System.in);
-		String capi;
-		/*try {
-			sc=new Scanner(new File("palindromo.txt"));//fichero abierto
-			System.out.println("CONTENIDO de palindromo.txt:");
-			do {
-				capi=sc.nextLine();
-				System.out.println(capi);
-			} while (sc.hasNextLine());
-			sc.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("El fichero no existe!");
-		}
-		 */
-		System.out.println("INTRODUCE UNA FRASE ");
-		capi=sc.nextLine();
-		if (comparacion(capi)) {
-			System.out.println("Si es palindromo");
+		
+		System.out.println("Introduce una frase: ");
+		frase=sc.nextLine();
+		if(palindromo(frase)) {
+			System.out.println("Sí es palindromo");
 		}else {
 			System.out.println("No es palindromo");
-		}
-		//LEER LAS FRASES DE UN FICHERO DE TEXTO, COMO NOMBRE EL USUARIO INTRODUCE POR
-		//TECLADO, Y GUARDAR EN EL FICHERO "resultado.txt" CADA FRASE LEIDA DEL FICHERO
-		//SEGUIDO DE "--> SI EL PALINDROMO, 0 "--> NO ES PALINDROMO
+		}*/
+		
+		/*LEER LAS FRASES DE UN FICHERO DE TEXTO, CUYO NOMBRE EL USUARIO INTRODUCE POR
+		 * TECLADO, Y GUARDAR EN EL FICHERO "resultado.txt" CADA FRASE LEIDA DEL FICHERO
+		 * SEGUIDO DE "--> SI ES PALINDROMO", O "--> NO ES PALINDROMO"
+		 */
 		String strFich, frase;
-		System.out.println("Introduce el nombre del fichero: ");
+		Scanner sc=new Scanner(System.in);
+		PrintWriter pw;
+		
+		System.out.print("Introduce el nombre del fichero de entrada: ");
 		strFich=sc.nextLine();
 		//ABRIR EL ARCHIVO PARA LEER, COMPROBANDO QUE EXISTA
-		
 		try {
 			sc=new Scanner(new File(strFich));
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("El fichero no existe");
 			System.exit(0);
 		}
+		
+		//PEDIR POR TECLADO EL FICHERO DE SALIDA
+		//SI EL FICHERO EXISTE, PEDIRÁ CONFIRMACIÓN DE SOBREESCRIBIR
+		//SI EL USUARIO RESPONDE QUE SÍ -> SE SOBREESCRIBE
+		//SI RESPONDE QUE NO VOVLERA A PEDIR EL NOMBRE DEL FICHERO
+		Scanner scTeclado=new Scanner(System.in);
+		Scanner sc2;
+		String resp;
+		boolean seguir;
+		do {
+			System.out.print("Introduce nombre del fichero de salida: ");
+			strFich=scTeclado.next();
+			seguir=false;
+			try {
+				sc2=new Scanner(new File(strFich));//COMPROBAR SI EXISTE
+				System.out.print("El fichero "+strFich+" ya existe. "
+									+ "¿Quieres sobreescribirlo? (S/N): ");
+				resp=scTeclado.nextLine();
+				scTeclado.nextLine();
+				if(resp.equalsIgnoreCase("S")) {
+					seguir=true;
+				}
+			} catch (FileNotFoundException e1) {
+				//EL FICHERO DE SALIDA NO EXISTE
+				seguir=true;
+			}
+		}while(seguir==false);
 		//ABRIR EL ARCHIVO "resultado.txt" PARA ESCRIBIR EN EL
-		PrintWriter pw;
 		try {
-			pw=new PrintWriter(new File("resultado.txt"));
-			//leer todas las frases del fichero de entrara y escribir en el de salida
-			//las mismas frases indicando si es palindromo o no
-			pw.println
+			pw=new PrintWriter(new File(strFich));
+			//leer todas las frases del fichero de entrada y escribir en el de salida
+			//las mismas frases indicando si son palindromos o no
+			do {
+				frase=sc.nextLine();
+				if(palindromo(frase)) {
+					pw.println(frase+" --> SI es palindromo");
+				}else {
+					pw.println(frase+" --> NO es palindromo");
+				}
+			}while(sc.hasNextLine());
+			pw.close();
+			sc.close();
+			System.out.println("El fichero se ha creado");
 		} catch (FileNotFoundException e) {
-			System.out.println("No se ha podido crear el archivo ");
+			System.out.println("No se ha podico crear el archivo");
 		}
 		
-		
-		
-		
-		comparacion(capi);
+		/*
+		//LO MISMO PERO CON BUFFEREDREADER
+		try {
+			BufferedReader br=new BufferedReader(new FileReader(strFich));
+			pw=new PrintWriter(new File("resultado.txt"));
+			do {
+				frase=br.readLine();
+				if(frase!=null) {
+					if(palindromo(frase)) {
+						pw.println(frase+" --> SI es palindromo");
+					}else {
+						pw.println(frase+" --> NO es palindromo");
+					}
+				}
+			}while(frase!=null);
+			pw.close();
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 	}
-	public static boolean comparacion(String capi) {
-		//FUNCION PALINDROMO QUE RECIBE UNA FRASE COMO PARAMETRO Y DEVUELVE "TRUE" SI LA FRASE ES
-		//UN PALINDROMO Y "FALSE" EN CASO CONTRARIO
+
+	//FUNCIÓN PALINDROMO QUE RECIBE UNA FRASE COMO PARÁMETRO Y DEVUELVE true SI LA FRASE ES
+	//UN PALINDROMO Y false EN CASO CONTRARIO
+	//DABALE ARROZ A LA         ZORRA EL ABAD
+	public static boolean palindromo(String frase) {
 		int j;
-		j=capi.length()-1;
-		capi.toLowerCase(); //LO PONE EN MINUSCULAS Y LA DEVUELVE CONVERTIDA
-		for (int i = 0; i < capi.length()/2; i++) {
+		j=frase.length()-1;//posicion del ultimo carcater
+		frase=frase.toLowerCase();
+		
+		for (int i = 0; i < frase.length()/2; i++) {
 			//saltar espacios
-			while (capi.charAt(i)==' ') {
+			while(frase.charAt(i)==' ') {
 				i++;
 			}
-			while (capi.charAt(j)==' ') {
-				j++;
+			while(frase.charAt(j)==' ') {
+				j--;
 			}
-			if (capi.charAt(i)!=capi.charAt(j)) {
+			if(frase.charAt(i)!=frase.charAt(j)) {
 				return false;
 			}
 			j--;
 		}
-		return true;	
+		
+		return true;
 	}
+	
 }
+
+
+
+
+
+

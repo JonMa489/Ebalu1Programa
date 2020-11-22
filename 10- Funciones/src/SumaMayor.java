@@ -1,63 +1,85 @@
 
 public class SumaMayor {
+	/*FUNCIONES:
+	 * llenar: llenar el array recibido como parametro con numeros aleatorios entre 1 y 99
+	 * mostrar: mostrar el array recibido como parametro por pantalla
+	 * filaMayor: recibe un array bidimensional como parametro y devuelve el NUMERO DE FILA
+	 * 				cuya suma sea la mayor
+	 * sumarFila: recibe como parametros un array bidimensional y un número de fila y 
+	 * 				devuelve la suma de dicha fila
+	 */
 	public static final int FILAS=10;
 	public static final int COLS=15;
-
-	/*FUNCIONES:
-	 * LLENAR: LLENAR EL ARRAY RECIBIDO COMO PARAMETRO CON NUMEROS ALEATORIOS ENTRE 1 Y 99
-	 * MOSTRAR: MOSTRAR EL ARRAY RECIBIDO COMO PARAMETRO POR PANTALLA
-	 * FILA MAYOR: RECIBE UN ARRAY BIDIMENSIONAL COMO PARAMETRO Y DEVUELVE EL NUMERO DE FILA CUYA SUMA SEA LA MAYOR
-	 * SUMARFILA:RECIBO COMO PARAMETRO UN ARRAY BIDIMENSIONAL Y UN NUMERO DE FILA Y DEVUELVE LA SUMA DE DICHA FILA
-	 * 
-	 */
+	
 	public static void main(String[] args) {
 		/*ARRAY DE 10X15
-		 * LLENARLO
-		 * MOSTRARLO
-		 * OBTENER EL NUMERO DE FILA CUYA SUMA ES LA MAYOR
-		 * OBTENER LA SUMA DE DICHA FILA
-		 */
-		//VARIABLES
-		int [][]array1; 
-		array1=new int[FILAS][COLS];
-
-
-
-		llenar(array1);
-		mostrar(array1);
-	    filamayor(array1);
-	    System.out.println();
-	    System.out.println("La fila cuya suma es la mayor es:"+filamayor(array1));
-	    
+			llenarlo
+			mostrarlo
+			obtener el número de fila cuya suma es la mayor, y mostrarlo
+			obtener la suma de dicha fila, y mostrar el valor de dicha suma
+			
+			ARRAY DE 10X15:
+			7 12 15 43 23 34 45 65 67 78 9 98 67 54 34
+			...........
+			...........
+			..............
+			43 45 56 76 87 98 9 23 43 12 23 34 34 45 56
+			La fila cuya suma es la mayor es: 3
+			Su suma es: 1580
+			
+		*/
+		int[][] numeros;
+		numeros=new int[FILAS][COLS];
+		int mayor;
+		llenar(numeros);
+		mostrar(numeros);
+		System.out.println();
+		mayor=filaMayor(numeros);
+		System.out.println("La fila cuya suma es la mayor es: "+mayor);
+		System.out.println();
+		System.out.println("la suma de esa fila es: "+sumarFila(numeros, mayor));
 	}
-	public static void llenar(int[][]array1) {
-		for  (int i= 0; i <array1.length; i++) {
-			for (int j = 0; j < array1[i].length; j++) {
-				array1[i][j] = (int) (Math.random()*99+1);
+	
+	public static void llenar(int[][] array) {
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[i].length; j++) {
+				array[i][j]=(int)(Math.random()*99+1);
 			}
 		}
 	}
-	public static void mostrar(int[][]array1) {
-		for  (int i= 0; i <array1.length; i++) {
-			System.out.println();
-			for (int j = 0; j < array1[0].length; j++) {
-				System.out.print(array1[i][j]+"  ");
-			}
-		}
-	}
-	public static int filamayor(int[][]array1) {
-		int sumarfilas=0;
-		int sumamayor=0;
-		int numfila=0;
-		for (int i = 0; i <FILAS; i++) {
+	
+	public static void mostrar(int[][] array) {
+		for (int i = 0; i < FILAS; i++) {
 			for (int j = 0; j < COLS; j++) {
-				sumarfilas=sumarfilas+array1[i][j];
+				System.out.print(array[i][j]+" ");
 			}
-			if (sumarfilas>sumamayor) {
-				sumamayor=sumarfilas;
-				numfila=i;
+			System.out.println();
+		}
+	}
+	
+	public static int filaMayor(int[][] array) {
+		int sumaFilas=0;
+		int sumaMayor=0;
+		int numFila=0;
+		for (int i = 0; i < FILAS; i++) {
+			sumaFilas=0;
+			for (int j = 0; j < COLS; j++) {
+				sumaFilas=sumaFilas+array[i][j];
+			}
+			if(sumaFilas>sumaMayor) {//cada vez que encuantro la fila mayor
+				sumaMayor=sumaFilas;
+				numFila=i;
 			}
 		}
-		return numfila;
+		
+		return numFila;
+	}
+	
+	public static int sumarFila(int[][] array, int fila) {
+		int suma=0;
+		for (int i = 0; i < array[0].length; i++) {
+			suma=suma+array[fila][i];
+		}
+		return suma;
 	}
 }

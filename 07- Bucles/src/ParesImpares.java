@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class SumaParesImpares {
 	public static void main(String[] args) {
 		/*PROGRAMA QUE MUESTRE EL SIGUIENTE MENU POR PANTALLA:

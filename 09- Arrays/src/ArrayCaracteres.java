@@ -1,47 +1,52 @@
 import java.util.Scanner;
 
 public class ArrayCaracteres {
-
 	public static void main(String[] args) {
-		/* LLENAR UN ARRAY DE 25 ELEMENTOS CON LETRAS MAYUSCULAS ALEATORIAS.
+		/*LLENAR UN ARRAY DE 25 ELEMENTOS CON LETRAS MAYUSCULAS ALEATORIAS.
 		 * MOSTRARLO POR PANTALLA, SEPARANDO CADA LETRA POR ESPACIOS EN BLANCO.
+		 * 
+		 * 
 		 */
-		
-		Scanner sc;
-		sc=new Scanner(System.in);
 		char car;
 		String strCad;
 		int num;
-		int i=0;
 		char[] cadena;
-		cadena=new char [25];
-		for (int cont = 0; cont < cadena.length; cont++) {
-			cadena [cont] = (char) (int)(Math.random()*26+65);
-			System.out.print(cadena[cont]+" ");
-		}
-		//LEER UN CARACTER POR TECLADO Y MOSTRAR LA POSICION O POSICIONES EN LAS QUE SE  
-		// ENCUENTRA ESA LETRA, SI NO ESTA, MOSTRAR UN MENSAJE
-		System.out.println("\nIntroduzca una letra:" );
-		strCad = sc.next();
-		car=strCad.charAt(0);
+		Scanner sc=new Scanner(System.in);
 		
-		for (int cont = 0; cont < cadena.length; cont++) {
-			if (car==cadena[cont]) {
-				System.out.println("Pos;"+cont);
-				i++;
+		cadena=new char[25];
+		//Math.random()*Nº de valores diferentes + Minimo
+		for (int i = 0; i < cadena.length; i++) {
+			cadena[i]=(char)((int)(Math.random()*26+'A'));
+			System.out.print(cadena[i]+" ");
+		}
+		System.out.println();
+		System.out.println();
+		//LEER UN CARACTER POR TECLADO Y MOSTRAR LA POSICIÓN O POSICIONES EN LAS QUE SE 
+		//SE ENCUANTRA ESA LETRA. SI NO ESTÁ, MOSTRAR UN MENSAJE
+		System.out.print("Introduce carácter a buscar: ");
+		strCad=sc.next();
+		car=strCad.charAt(0);
+		int cont=0;
+		for (int i = 0; i < cadena.length; i++) {
+			if(car==cadena[i]) {
+				System.out.println("Pos: "+(i+1));
+				cont++;
 			}
 		}
-	
-		if (i==0) {
+		
+		if(cont==0) {
 			System.out.println("La letra no esta");
 		}
+		
 		//MOSTRAR LAS POSICIONES DE LAS VOCALES
-		System.out.println("Vocales:");
-		for (int cont = 0; cont < cadena.length; cont++) {
-			if (cadena [cont]=='A' || cadena [cont]=='E' ||  cadena [cont]=='O' || cadena [cont]=='U') {
-				System.out.println("Pos: "+(cont+1));
+		System.out.print("Posiciones de las vocales: ");
+		for (int i = 0; i < cadena.length; i++) {
+			if(cadena[i]=='A' || cadena[i]=='E' || cadena[i]=='I' || cadena[i]=='O' || cadena[i]=='U') {
+				System.out.println("Pos: "+(i+1)+" - "+cadena[i]);
 			}
 		}
+		
+		
 	}
-
 }
+

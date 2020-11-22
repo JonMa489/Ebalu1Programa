@@ -1,35 +1,34 @@
 import java.util.Scanner;
 
+
 public class LLenarArray {
 
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
-		/* LLENAR UN ARRAY DE 10 ELEMENTOS CON 10 NUMEROS ENTEROS INTRODUCIDOS POR TECLADO
-		 * UNA VEZ LLENO, MOSTRARLO POR PANTALLA EN ORDEN INVERSO DEL ULTIMO NUMERO
-		 * INTRODUCIDO EL PRIMERO
+		/*LLENAR UN ARRAY DE 10 ELEMENTOS CON 10 NUMEROS ENTEROS INTRODUCIDOS POR TECLADO.
+		 * UNA VEZ LLENO, MOSTRARLO POR PANTALLA EN ORDEN INVERSO (DEL ULTIMO NUMERO
+		 * INTRODUCIDO AL PRIMERO)
 		 */
-		Scanner sc;
-		sc=new Scanner(System.in);
-		//DECLARACIONES DE VARIABLES
+		
+		//DECLARACION DE VARIABLES
 		int num;
-		int cont;
-		int[] numeros;
-		numeros=new int[10];
+		int []numeros;
+		Scanner sc;
 		//CREAR INSTANCIAS
+		sc=new Scanner(System.in);
 		numeros=new int[10];
-		//PEDIR 10NUMEROS POR TECLADO Y GUARDARLOS EN EL ARRAY
-		System.out.println("Escribe 10 numeros abajo");
-		for (int cont=0;cont<numeros.length;cont++) {
-		System.out.println("Numeros:");
-		numeros[cont]=sc.nextInt();		
+		
+		//PEDIR 10 NUMEROS POR TECLADO Y GUARDARLOS EN EL ARRAY
+		for(int cont=0;cont<numeros.length;cont++) {
+			System.out.print("Introduce nº: ");
+			numeros[cont]=sc.nextInt();
 		}
-		for (int cont-10;cont>0;cont--) { 
-			System.out.print(numeros[cont]+ "-");
-					}
-
-
-
-
+		
+		for(int cont=numeros.length-1;cont>=0;cont--) {
+			System.out.print(numeros[cont]+" ");
+		}
+	
 	}
 
 }
+
+

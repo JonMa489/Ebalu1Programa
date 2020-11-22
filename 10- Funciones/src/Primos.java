@@ -3,49 +3,74 @@ import java.util.Scanner;
 public class Primos {
 
 	public static void main(String[] args) {
-		//LEEN UN NUMERO POR TECLADO Y MOSTRAR UN MENSAJE INDICANDO SI ES PRINERO O NO
-		//FUNCION QUE ME DIGA SI UN NUMERO ES PRIMO O NO.
-		//FUNCION QUE DEVUELVA VERDADERA EN EL NUMERO RECIBIDO COMO PARAMETRO ES PRIMO.
-		//FALSO EN CASO CONTRARIO
-		@SuppressWarnings("unused")
-		int num,contPrimos, cont=1;
-		@SuppressWarnings({"resource" })
+		//LEER UN NUMERO POR TECLADO Y MOSTRAR UN MENSAJE INDICANDO SI ES PRIMO O NO
+		int num, cont, contPrimos;
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Introduce un numero: ");
+		
+		System.out.println("introduce un número: ");
 		num=sc.nextInt();
-		System.out.println(esPrimo(num));
+		if(esPrimo(num)) {
+			System.out.println("SI es primo");
+		}else {
+			System.out.println("No es primo");
+		}
 		
-		
-		while (contPrimos<=num) {
-			if (esPrimo(cont)) {
-				System.out.println(cont+" ");
-				if () {
+		//PROGRAMA QUE MUESTRE POR PANTALLA LOS n PRIMEROS NUMEROS PRIMOS, SIENDO n UN 
+		//NUMERO INTRODUCIDO POR TECLADO
+		contPrimos=0;
+		cont=1;
+		while(contPrimos<=num) {
+			if(esPrimo(cont)) {
+				System.out.print(cont+" ");
+				contPrimos++;
+				if(contPrimos%10==0) {
 					System.out.println();
 				}
 			}
+			cont++;
 		}
-		for (cont = 1; contPrimos<=100; cont++) {
-			if (esPrimo(cont)) {
+		
+		//OTRA FORMA
+		contPrimos=0;
+		for(cont=1;contPrimos<=100;cont++) {
+			if(esPrimo(cont)) {
 				contPrimos++;
 				System.out.println(cont+" ");
 			}
 		}
 	}
-	public static boolean esPrimo(int num	) {
-		int cont=0,num1;
-		//CONTAR EL NUMERO DE DIVISORES DEL NUMERO DESDE EL 1 HASTA EL SI MISMO
-		//SI SOLO HAY DOS, EL NUMERO ES PRIMO
-		for (int i = 1; i <=num; i++) {
-			if (num%i==0) { 
+	
+	//FUNCIÓN QUE ME DIGA SI UN NUMEROS ES PRIMO O NO
+	//FUNCION QUE DEVUELVA VERDADERO SI EL NUMERO RECIBIDO COMO PARAMETRO ES PRIMO,
+	//Y FALSO EN CASO CONTRARIO
+	public static boolean esPrimo(int num) {
+		//contar el numero de divisores del numero desde el 1 hasta sí mismo
+		//si solo hay DOS, el número es primo
+		int cont;
+		cont=0;
+		int i=2;
+		
+		while(i<num) {
+			if(num%i==0) {
+				return false;
+			}
+			i++;
+		}
+		return true;
+		
+		/*for (int i = 2; i < num; i++) {
+			if(num%i==0) {
 				cont++;
 			}
 		}
 		
-		if (cont==2) {
+		/*if(cont==2) {
 			return true;
-		}else{
+		}else {
 			return false;
-		}
-		
+		}*/
+		//return (cont==0);
+	
 	}
+
 }

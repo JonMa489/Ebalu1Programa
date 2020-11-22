@@ -1,116 +1,118 @@
 import java.util.Scanner;
 
 public class Tablero {
-	public static final int FILAS=9;
-	public static final int COLS=9;
-	@SuppressWarnings("resource")
-	public static void main (String[]args) {
-		/* Crear un tablero de ajedrez de 8x8
-		 * en el trablero almacenaremos un caracter por cada ficha:"P" Torre, etc
+	//CONSTANTES
+	public static final int FILAS=8;
+	public static final int COLS=8;
+	
+	public static void main(String[] args) {
+		/*CREAR UN TABLERO DE AJEDREZ DE 8X8
+		 * EN EL TABLERO ALMACENAREMOS UN CARACTER POR CADA FICHA: 'P' Peon, 'T' Torre, etc
 		 * 
-		 * Inializar el tablero a la situacion inicial
-		 * mostrar el tablero
+		 *  INICIALIZAR EL TABLERO A LA SITUACIÓN INICIAL
+		 *  MOSTRAR EL TABLERO
+		 *  
 		 */
 
-		//CONSTANTES
-
-
 		//DECLARACION
-		Scanner sc;
-		sc=new Scanner(System.in);
-		//INTANCIAR
-		int mover;
-		char[][] tablero;
+		char [][]tablero;
+		int filaOrig, colOrig, filaDest, colDest;
+		
+		//INSTANCIAR
 		tablero=new char[FILAS][COLS];
-		//inializar el tablero: vacio (un espacio, un punto, un guion...)
-
-		System.out.println();
-		//Inicilizar el tablero a la posicion inicial
-		for (int fila = 0; fila <FILAS; fila++) {
-			for (int col=0;col<COLS;col++) {
+		Scanner sc=new Scanner(System.in);
+		
+		/*tablero.length --> nº filas
+		tablero[i].length --> nº de elementos en cada fila*/
+		//INICIALIZAR EL TABLERO: VACIO (UN PUNTO)
+		for(int fila=0;fila<FILAS;fila++) {
+			for(int col=0;col<COLS;col++) {
 				tablero[fila][col]='.';
-				tablero [1][1]='T';
-				tablero [1][2]='C';
-				tablero [1][3]='A';
-				tablero [1][4]='R';
-				tablero [1][5]='X';
-				tablero [1][6]='A';
-				tablero [1][7]='C';
-				tablero [1][8]='T';
-
-				for (int col1 = 0; col1 < COLS; col1++) {
-					//FILA 1
-					tablero[2][col1]='P';
-					//FILA 6
-					tablero[7][col1]='P';
-				}
-				tablero [8][1]='T';
-				tablero [8][2]='C';
-				tablero [8][3]='A';
-				tablero [8][4]='R';
-				tablero [8][5]='X';
-				tablero [8][6]='A';
-				tablero [8][7]='C';
-				tablero [8][8]='T';
-				//NUMEROS
-				tablero [0][1]='1';
-				tablero [0][2]='2';
-				tablero [0][3]='3';
-				tablero [0][4]='4';
-				tablero [0][5]='5';
-				tablero [0][6]='6';
-				tablero [0][7]='7';
-				tablero [0][8]='8';
-
-				tablero [1][0]='1';
-				tablero [2][0]='2';
-				tablero [3][0]='3';
-				tablero [4][0]='4';
-				tablero [5][0]='5';
-				tablero [6][0]='6';
-				tablero [7][0]='7';
-				tablero [8][0]='8';
+				System.out.print(tablero[fila][col]+" ");
+		}
+			System.out.println();
+		}
+				
+		System.out.println();
+		System.out.println();
+		//INICILIZAR EL TABLERO A LA POSICIÓN INICIAL
+		tablero[0][0]='T';
+		tablero[0][1]='C';
+		tablero[0][2]='A';
+		tablero[0][3]='R';
+		tablero[0][4]='X';
+		tablero[0][5]='A';
+		tablero[0][6]='C';
+		tablero[0][7]='T';
+	
+		//PARA LOS PEONES
+		for(int col=0;col<COLS;col++) {
+			//FILA 1
+			tablero[1][col]='P';
+		}
+		
+		//FILA 6
+		for(int col=0;col<COLS;col++) {
+			tablero[6][col]='P';
+		}
+		
+		//LA ULTIMA FILA
+		tablero[7][0]='T';
+		tablero[7][1]='C';
+		tablero[7][2]='A';
+		tablero[7][3]='R';
+		tablero[7][4]='X';
+		tablero[7][5]='A';
+		tablero[7][6]='T';
+		tablero[7][7]='C';
+		
+		//MOSTRAR DE NUEVO EL TABLERO
+		System.out.println("  0 1 2 3 4 5 6 7");
+		for(int fila=0;fila<FILAS;fila++) {
+			System.out.print(fila+" ");
+			for(int col=0;col<COLS;col++) {
 				System.out.print(tablero[fila][col]+" ");
 			}
 			System.out.println();
 		}
-
-
+		
 		//PEDIR POR TECLADO UNA FILA Y UNA COLUMNA ORIGEN Y UNA FILA Y UNA COLUMNA DESTINO
 		//Y MOVER LA FICHA DE LA CASILLA ORIGEN A LA CASILLA DESTINO
-
-
-		/*VARIABLES NUEVAS
-		 * 
-		 * 
-		 */
-		int filaorig, colorigen;
-		System.out.println("Introduce fila origen:");
-		filaorig=sc.nextInt();
-		System.out.println("Introduce Columna origen:");
-		colorigen=sc.nextInt();
-
-		//volver a mostrar el tablero
-		System.out.println("  0 1 2 3 4 5 6 7");
-		for (int fila = 0; fila < FILAS; fila++) {
-			System.out.print(" ");
-			for (int col = 0; col <COLS; col++) {
-				System.out.print(tablero[fila][col]+ " ");
+		System.out.print("Itroduce Fila origen: ");
+		filaOrig=sc.nextInt();
+		System.out.print("Itroduce Columna origen: ");
+		colOrig=sc.nextInt();
+		
+		System.out.print("Itroduce Fila destino: ");
+		filaDest=sc.nextInt();
+		System.out.print("Itroduce Columna destino: ");
+		colDest=sc.nextInt();
+		
+		tablero[filaDest][colDest]=tablero[filaOrig][colOrig];
+		tablero[filaOrig][colOrig]='.';
+		
+		//VOLVER A MOSTRAR EL TABLERO
+		System.out.println("  0 1 2 3 4 5 6 7 (NEGRAS)");
+		for(int fila=0;fila<FILAS;fila++) {
+			System.out.print(fila+" ");
+			for(int col=0;col<COLS;col++) {
+				System.out.print(tablero[fila][col]+" ");
 			}
 			System.out.println();
 		}
-
-		//volver a mostra el tablero girado
-		System.out.println("Escribe si quieres mover el tablero de lado: ");
-		mover=sc.nextInt();
 		
+		System.out.println();
+		System.out.println();
+		//MOSTRAR EL TABLERO CON LAS NEGRAS A LA IZQUIERDA Y LAS BLANCAS A LA DERECHA
+		for(int col=COLS-1;col>=0;col--) {
+
+			for(int fila=0;fila<FILAS;fila++) {
+				System.out.print(tablero[fila][col]+" ");
+			}
+			System.out.println();
+		}
 	}
 }
-
-
-
-
-
 
 
 
