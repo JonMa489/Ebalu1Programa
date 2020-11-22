@@ -32,7 +32,72 @@ public class Ejercicio8 {
 	}
 	public static void orden (int numeros[]) {
 		int aux;
-		for (int i = 0; i < numeros.length; i++) {
+		for (int i=0; i<numeros.length/2; i++) {
+			aux = numeros[i];
+			numeros[i] = numeros[numeros.length-1-i];
+			numeros[numeros.length-1-i] = aux;
+		}
+		for  (int i= 0; i <numeros.length; i++) {
+			System.out.print(numeros[i]+" ");
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//PRUEBAS 
+
+
+
+/*int aux[]=new int[numeros.length];
+		for (int i = numeros.length, j=0; i>=0 ; i--,j++) {
+			aux[j]=numeros[i];
+			System.out.print(aux[j]+" ");
+		}*/
+/*for (int i = 0; i < numeros.length; i++) {
 			for (int j = i + 1; j < numeros.length; j++) {
 
 				if (numeros[i] < numeros[j]) {
@@ -44,6 +109,13 @@ public class Ejercicio8 {
 		}
 		for (int i1= 0; i1 <numeros.length; i1++) {
 			System.out.print(numeros[i1]+" ");
-		}
-	}
-}
+		}*/
+
+/* private static void visualizar(int[] array){ 
+	        String cadena = "Array: ";
+	        for (int i = 0; i < array.length; i++) {
+	            cadena += array[i] + ", ";
+	        }
+	        cadena = cadena.substring(0, cadena.length()-2);
+	        System.out.println(cadena);
+	    }*/

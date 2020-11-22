@@ -12,6 +12,7 @@ public class Ejercicio910 {
 					parÃ¡metro.*/
 		int[][] tablero; 
 		tablero=new int[FILAS][COLS];
+
 	}
 	
 }
