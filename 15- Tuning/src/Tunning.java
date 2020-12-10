@@ -25,9 +25,9 @@ import java.awt.Dimension;
 public class Tunning extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtNombre;
-	private JTextField txtApellidos;
-	private JTextField txtDireccion;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -85,42 +85,38 @@ public class Tunning extends JFrame {
 		contentPane.add(PanelMain, BorderLayout.CENTER);
 		PanelMain.setLayout(new BoxLayout(PanelMain, BoxLayout.Y_AXIS));
 		
-		JPanel primeraFila = new JPanel();
-		PanelMain.add(primeraFila);
-		primeraFila.setLayout(new BoxLayout(primeraFila, BoxLayout.X_AXIS));
-		
 		JPanel PrimeraFila = new JPanel();
 		PrimeraFila.setBackground(Color.CYAN);
-		primeraFila.add(PrimeraFila);
+		PanelMain.add(PrimeraFila);
 		PrimeraFila.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel Nombre = new JLabel("Nombre: ");
-		Nombre.setBackground(Color.BLACK);
 		Nombre.setHorizontalAlignment(SwingConstants.RIGHT);
+		Nombre.setBackground(Color.BLACK);
 		PrimeraFila.add(Nombre);
 		
-		txtNombre = new JTextField();
-		txtNombre.setBackground(Color.LIGHT_GRAY);
-		PrimeraFila.add(txtNombre);
-		txtNombre.setColumns(10);
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBackground(Color.LIGHT_GRAY);
+		PrimeraFila.add(textField);
 		
 		JLabel Apellidos = new JLabel("Apellidos: ");
 		Apellidos.setHorizontalAlignment(SwingConstants.RIGHT);
 		PrimeraFila.add(Apellidos);
 		
-		txtApellidos = new JTextField();
-		txtApellidos.setBackground(Color.LIGHT_GRAY);
-		PrimeraFila.add(txtApellidos);
-		txtApellidos.setColumns(10);
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBackground(Color.LIGHT_GRAY);
+		PrimeraFila.add(textField_1);
 		
 		JLabel Direccion = new JLabel("Direccion: ");
 		Direccion.setHorizontalAlignment(SwingConstants.RIGHT);
 		PrimeraFila.add(Direccion);
 		
-		txtDireccion = new JTextField();
-		txtDireccion.setBackground(Color.LIGHT_GRAY);
-		PrimeraFila.add(txtDireccion);
-		txtDireccion.setColumns(10);
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBackground(Color.LIGHT_GRAY);
+		PrimeraFila.add(textField_2);
 		
 		JLabel Provincia = new JLabel("Provincia: ");
 		Provincia.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -175,15 +171,9 @@ public class Tunning extends JFrame {
 		Nada.setBackground(Color.BLUE);
 		SujetaPreferencias.add(Nada);
 		
-		JPanel listas = new JPanel();
-		listas.setBackground(Color.CYAN);
-		listas.setForeground(Color.CYAN);
-		segundaFila.add(listas, BorderLayout.CENTER);
-		listas.setLayout(new BoxLayout(listas, BoxLayout.Y_AXIS));
-		
 		JPanel lista = new JPanel();
 		lista.setBackground(Color.CYAN);
-		listas.add(lista);
+		segundaFila.add(lista, BorderLayout.SOUTH);
 		lista.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Tunning");
@@ -224,19 +214,20 @@ public class Tunning extends JFrame {
 		TerceraFila.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblNewLabel_1 = new JLabel("Comentarios: ");
-		lblNewLabel_1.setPreferredSize(new Dimension(67, 50));
 		lblNewLabel_1.setForeground(Color.WHITE);
 		TerceraFila.add(lblNewLabel_1);
 		
 		TextArea textArea = new TextArea();
-		textArea.setPreferredSize(new Dimension(0, 50));
 		TerceraFila.add(textArea);
 		
-		JPanel panel_1 = new JPanel();
-		TerceraFila.add(panel_1);
-		
 		JPanel panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		panel.setBackground(Color.BLUE);
 		TerceraFila.add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.BLUE);
+		TerceraFila.add(panel_1);
 		
 		JLabel lblNewLabel_4 = new JLabel("Pedidos: ");
 		lblNewLabel_4.setForeground(Color.WHITE);
