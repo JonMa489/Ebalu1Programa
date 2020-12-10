@@ -113,7 +113,9 @@ public class ClaseGeometria extends JFrame {
 			modelo2.addElement(p.getStr());
 		}
 	}
+	
 	public void registrarEventos() {
+		btnCalcDistMax.
 		//AL SELECCIONAR UN ELEMENTO DE UN LISTA, HABILITAR EL BOTON
 		//CALCULAR  DIST SI HAY ELEMENTOS SELECIONADOS EN AMBAS LISTAS
 		lstPuntos1.addListSelectionListener(new ListSelectionListener() {
