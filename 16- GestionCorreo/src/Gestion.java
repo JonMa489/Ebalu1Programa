@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Gestion extends JFrame {
 
@@ -86,7 +88,7 @@ public class Gestion extends JFrame {
 		contentPane.add(btnAnadir);
 		
 		JLabel lblNewLabel_2 = new JLabel("Nombres:");
-		lblNewLabel_2.setBounds(33, 199, 46, 14);
+		lblNewLabel_2.setBounds(33, 199, 100, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -97,7 +99,7 @@ public class Gestion extends JFrame {
 		scrollPane.setViewportView(lstNombre);
 		
 		JLabel lblNewLabel_3 = new JLabel("Direcciones de correo:");
-		lblNewLabel_3.setBounds(171, 199, 123, 14);
+		lblNewLabel_3.setBounds(171, 199, 140, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -108,7 +110,7 @@ public class Gestion extends JFrame {
 		scrollPane_1.setViewportView(lstCorreo);
 		
 		JLabel lblNewLabel_4 = new JLabel("Direcciones Web:");
-		lblNewLabel_4.setBounds(321, 199, 137, 14);
+		lblNewLabel_4.setBounds(321, 199, 149, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -133,8 +135,17 @@ public class Gestion extends JFrame {
 		btnSalir = new JButton("Salir");
 		btnSalir.setBounds(496, 423, 89, 23);
 		contentPane.add(btnSalir);
-	
+		registrarEventos();
 	}//FIN DE CONSTRUCTOR
-	
-	
+	public void registrarEventos() {
+		
+		//BOTON SALIR 
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(WIDTH);
+			}
+		});
+		
+		
+	}
 }

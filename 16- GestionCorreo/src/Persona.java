@@ -36,8 +36,9 @@ public class Persona {
 	}
 	//METODOS
 	public boolean esEmailCorrecto() {
+		//PARA NO CONFUNDIRSE Y AÑADIR MUCHAS O NINGUNA @
 		int contArrobas=0;
-		for (int i = 0; i < mail.length; i++) {
+		for (int i = 0; i < mail.length(); i++) {
 			if (mail.charAt(i)==('@')) {
 				contArrobas++;
 			}
@@ -45,7 +46,14 @@ public class Persona {
 		if (contArrobas>=2 || contArrobas==0) {
 			return false;
 		}
-		if (incorrecto2) {
+		//PARA NO CONFUNDIRSE Y AÑADIR MUCHAS O NINGUNA .COM
+		int contCOM=0;
+		for (int i = 0; i < mail.length(); i++) {
+			if (mail.toString()==(".com")) {
+				contCOM++;
+			}
+		}
+		if (contCOM>=2 || contCOM==0) {
 			return false;
 		}
 		if (incorrecto3) {
