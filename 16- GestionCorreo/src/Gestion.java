@@ -139,7 +139,7 @@ public class Gestion extends JFrame {
 		lstWeb.setModel(modelo3);
 
 		btnEnviar = new JButton("Enviar Mail");
-		btnEnviar.setBounds(496, 283, 89, 23);
+		btnEnviar.setBounds(496, 283, 115, 23);
 		contentPane.add(btnEnviar);
 
 		btnCargar = new JButton("Cargar Datos");
@@ -175,6 +175,15 @@ public class Gestion extends JFrame {
 				p=new Persona(txtNombre.getText(), txtCorreo.getText(), txtWeb.getText());
 				// SI EL MAIL ES CORRECTO AÑADO A LA PERSONA AL ARRAYLIST, LOS DATOS DE LA PERSONA A LOS JList
 				//SINO ES CORRECTO, LE DOY EL FOCO AL TEXTFIELD CORREO Y SELECCIONAMOS EL TEXTO.
+				if (!p.nombreCorrecto()) {
+					JOptionPane.showMessageDialog(Gestion.this, p.getStrErrorN());
+					txtNombre.requestFocus();
+					txtNombre.selectAll();
+				}else { //SI EL CORREO ES CORRECTO AÑADO A LA PERSONA AL ARRAYLIST DATOS DE LA PERSONA A LOS JList
+					//DATOS DE LA PERSON EN UN JLIST
+					ArrayPersonas.add(p);
+					modelo1.addElement(p.getNombre());
+				}
 				if (!p.esEmailCorrecto()) {
 					JOptionPane.showMessageDialog(Gestion.this, p.getStrError());
 					txtCorreo.requestFocus();
@@ -182,7 +191,6 @@ public class Gestion extends JFrame {
 				}else { //SI EL CORREO ES CORRECTO AÑADO A LA PERSONA AL ARRAYLIST DATOS DE LA PERSONA A LOS JList
 					//DATOS DE LA PERSON EN UN JLIST
 					ArrayPersonas.add(p);
-					modelo1.addElement(p.getNombre());
 					modelo2.addElement(p.getMail());
 					modelo3.addElement(p.getWeb());
 					//VACIAR LOS JTextField Y DAR EL FOCO AL NOMBRE
