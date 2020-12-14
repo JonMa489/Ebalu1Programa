@@ -5,6 +5,8 @@ import java.awt.FileDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
@@ -18,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
 public class Gestion extends JFrame {
@@ -179,6 +182,7 @@ public class Gestion extends JFrame {
 					JOptionPane.showMessageDialog(Gestion.this, p.getStrErrorN());
 					txtNombre.requestFocus();
 					txtNombre.selectAll();
+					return;
 				}else { //SI EL CORREO ES CORRECTO AÑADO A LA PERSONA AL ARRAYLIST DATOS DE LA PERSONA A LOS JList
 					//DATOS DE LA PERSON EN UN JLIST
 					ArrayPersonas.add(p);
@@ -192,7 +196,7 @@ public class Gestion extends JFrame {
 					//DATOS DE LA PERSON EN UN JLIST
 					ArrayPersonas.add(p);
 					modelo2.addElement(p.getMail());
-					modelo3.addElement(p.getWeb());
+					modelo3.addElement(p.getWeb()+" ");
 					//VACIAR LOS JTextField Y DAR EL FOCO AL NOMBRE
 					txtNombre.setText("");
 					txtCorreo.setText("");
@@ -230,17 +234,79 @@ public class Gestion extends JFrame {
 		});
 		//BOTON DE CARGAR
 		btnCargar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//ELEGIR EL ARCHIVO (FileDialgo)
-				
-				//ABRIR EL ARCHIVO (Scanner o BufferReader)
-				
-				//LEER TODOS LOS DATOS DEL ARCHIVO Y CARGARLOS EN: 
-					//ARRAYLIST
+
+				Persona p=new Persona();
+				FileDialog dlgCargar;
+				dlgCargar=new FileDialog(Gestion.this, "Elegir Archivo", FileDialog.LOAD);
+				dlgCargar.setVisible(true);
+				if (dlgCargar.getFile()==null) {
+					return; 
+				}
+				//ABRIR EL ARCHIVO (Scanner o BufferReader)	
+				try {
+					Scanner sc = new Scanner (new File(dlgCargar.getDirectory()+dlgCargar.getFile()));
+					//VACIAR LOS 4 JList Y EL ARRAYLIST DE PERSONAS
+					modelo1.clear();
+					modelo2.clear();
+					modelo3.clear();
+					ArrayPersonas.clear();
+					//LEER TODOS LOS DATOS DEL ARCHIVO Y CARGARLOS EN: 
+					//ARRAYLIST de personas
 					//CADA DATO EN SU JLIST
-					
+					while (sc.hasNextLine()) {
+						p=p.cargar(sc);
+						ArrayPersonas.add(p);
+						modelo1.addElement(p.getNombre());
+						modelo2.addElement(p.getMail());
+						modelo3.addElement(p.getWeb());
+					}
+					sc.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}	
+		});
+		//AL SELECCIONAR NOMBRE SE SELECIONAN LOS DEMAS
+		lstNombre.addListSelectionListener (new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				lstCorreo.setSelectedIndex(lstNombre.getSelectedIndex());
+				lstWeb.setSelectedIndex(lstNombre.getSelectedIndex());
+
+			}
+		});	
+		//AL SELECCIONAR MAIL SE SELECIONAN LOS DEMAS
+		lstCorreo.addListSelectionListener (new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				lstNombre.setSelectedIndex(lstCorreo.getSelectedIndex());
+				lstWeb.setSelectedIndex(lstCorreo.getSelectedIndex());
+
+			}
+		});	
+		//AL SELECCIONAR WEB SE SELECIONAN LOS DEMAS
+		lstWeb.addListSelectionListener (new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				lstCorreo.setSelectedIndex(lstWeb.getSelectedIndex());
+				lstNombre.setSelectedIndex(lstWeb.getSelectedIndex());
+
+			}
+		});	
+		//BOTON ENVIAR EMAIL
+		btnEnviar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+
 			}
 		});
 	}//FIN DE REGISTRAR EVENTOS

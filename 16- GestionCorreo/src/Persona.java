@@ -1,4 +1,5 @@
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class Persona {
 
@@ -103,12 +104,30 @@ public class Persona {
 			strErrorN="El nombre contiene menos de dos caracteres";
 			return false;
 		}
+		if (nombre==(" ")) {
+			strErrorN="El nombre no puede contener espacios";
+			return false;
+		}
 		return true;
+		
 	}
 	public void guardar(PrintWriter pw) {
 		pw.println(this.nombre);
 		pw.println(this.mail);
 		pw.println(this.web);
+	}
+	public Persona cargar(Scanner sc) {
+		Persona p=new Persona(String.valueOf(sc.nextLine()), 
+							String.valueOf(sc.nextLine()), 
+							String.valueOf(sc.nextLine()));
+		/*String nombre, mail, web;
+		nombre=sc.nextLine();
+		mail=sc.nextLine();
+		web=sc.nextLine();
+		p=new Persona (nombre, mail, web);
+		return p;*/
+//		return p;
+		return p;
 		
 	}
 }
