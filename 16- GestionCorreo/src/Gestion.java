@@ -22,6 +22,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class Gestion extends JFrame {
 
@@ -41,6 +42,7 @@ public class Gestion extends JFrame {
 	private JButton btnSalir;
 	private ArrayList<Persona> ArrayPersonas;
 	private DefaultListModel<String> modelo1,modelo2,modelo3;
+	private Correo correo;
 	/**
 	 * Launch the application.
 	 */
@@ -64,6 +66,7 @@ public class Gestion extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 637, 511);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.YELLOW);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -160,6 +163,19 @@ public class Gestion extends JFrame {
 		ArrayPersonas = new ArrayList<Persona>();
 		registrarEventos();
 	}//FIN DE CONSTRUCTOR
+
+	//GETTERS Y SETTERS
+	
+	public ArrayList<Persona> getArrayPersonas() {
+		return ArrayPersonas;
+	}
+
+	public void setArrayPersonas(ArrayList<Persona> arrayPersonas) {
+		ArrayPersonas = arrayPersonas;
+	}
+	
+	//EVENTOS
+	
 	public void registrarEventos() {
 
 		//BOTON SALIR 
@@ -266,7 +282,7 @@ public class Gestion extends JFrame {
 					}
 					sc.close();
 				} catch (Exception e) {
-					// TODO: handle exception
+				
 				}
 			}	
 		});
@@ -309,5 +325,19 @@ public class Gestion extends JFrame {
 
 			}
 		});
+		//BOTON ENVIAR (ABRIR CORREO Y CERRAR LA PESTAÑA PRINCIPAL)
+		btnEnviar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				correo=new Correo(Gestion.this);
+				correo.setVisible(true);
+				Gestion.this.setVisible(false);
+				if (!lstCorreo.isSelectionEmpty()) {
+					correo.getTxtPara().setText((String)lstCorreo.getSelectedValue());;
+				}
+			}
+		});
 	}//FIN DE REGISTRAR EVENTOS
+
 }
