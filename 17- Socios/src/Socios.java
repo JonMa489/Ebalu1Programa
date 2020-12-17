@@ -9,7 +9,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class Socios extends JFrame {
 
@@ -23,7 +25,8 @@ public class Socios extends JFrame {
 	private JTextField txtRegistro;
 	private JButton btnSig;
 	private JButton btnUltimo;
-	private BaseDatos j;
+	private BaseDatos bd;
+	private ResultSet rs;
 
 
 	/**
@@ -49,6 +52,7 @@ public class Socios extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 540, 422);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.CYAN);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -58,11 +62,11 @@ public class Socios extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nombre:");
-		lblNewLabel_1.setBounds(73, 145, 46, 14);
+		lblNewLabel_1.setBounds(73, 145, 93, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Direcci\u00F3n:");
-		lblNewLabel_2.setBounds(73, 189, 69, 14);
+		lblNewLabel_2.setBounds(73, 189, 123, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Telefono: ");
@@ -70,22 +74,23 @@ public class Socios extends JFrame {
 		contentPane.add(lblNewLabel_3);
 		
 		txtNumSocio = new JTextField();
-		txtNumSocio.setBounds(175, 101, 86, 20);
+		txtNumSocio.setBounds(169, 101, 123, 20);
 		contentPane.add(txtNumSocio);
 		txtNumSocio.setColumns(10);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(175, 142, 86, 20);
+		txtNombre.setBounds(169, 142, 123, 20);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtDir = new JTextField();
-		txtDir.setBounds(175, 187, 86, 17);
+		txtDir.setBounds(169, 187, 123, 17);
 		contentPane.add(txtDir);
 		txtDir.setColumns(10);
 		
 		txtTelefono = new JTextField();
-		txtTelefono.setBounds(175, 233, 86, 20);
+		txtTelefono.setBackground(Color.WHITE);
+		txtTelefono.setBounds(169, 233, 123, 20);
 		contentPane.add(txtTelefono);
 		txtTelefono.setColumns(10);
 		
@@ -118,8 +123,9 @@ public class Socios extends JFrame {
 		contentPane.add(txtRegistro);
 		txtRegistro.setColumns(10);
 		
-		BaseDatos bd = new BaseDatos();
+		bd = new BaseDatos();
 		bd.conectar();
+		rs=bd.obtenerDatos();
 		registrarEventos();
 	}//FIN DEL CONSTRUCTOR
 	public void registrarEventos(){
