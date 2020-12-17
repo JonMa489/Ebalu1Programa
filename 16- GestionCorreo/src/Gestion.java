@@ -16,6 +16,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -165,7 +167,7 @@ public class Gestion extends JFrame {
 	}//FIN DE CONSTRUCTOR
 
 	//GETTERS Y SETTERS
-	
+
 	public ArrayList<Persona> getArrayPersonas() {
 		return ArrayPersonas;
 	}
@@ -173,9 +175,9 @@ public class Gestion extends JFrame {
 	public void setArrayPersonas(ArrayList<Persona> arrayPersonas) {
 		ArrayPersonas = arrayPersonas;
 	}
-	
+
 	//EVENTOS
-	
+
 	public void registrarEventos() {
 
 		//BOTON SALIR 
@@ -282,7 +284,7 @@ public class Gestion extends JFrame {
 					}
 					sc.close();
 				} catch (Exception e) {
-				
+
 				}
 			}	
 		});
@@ -327,7 +329,7 @@ public class Gestion extends JFrame {
 		});
 		//BOTON ENVIAR (ABRIR CORREO Y CERRAR LA PESTAÑA PRINCIPAL)
 		btnEnviar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				correo=new Correo(Gestion.this);
@@ -338,6 +340,7 @@ public class Gestion extends JFrame {
 				}
 			}
 		});
+
 	}//FIN DE REGISTRAR EVENTOS
 
 }

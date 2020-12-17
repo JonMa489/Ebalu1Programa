@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -75,7 +77,7 @@ public class Correo extends JFrame {
 		contentPane.add(lblNewLabel_3);
 
 		txtAsunto = new JTextField();
-		txtAsunto.setBounds(116, 154, 339, 20);
+		txtAsunto.setBounds(116, 154, 339, 37);
 		contentPane.add(txtAsunto);
 		txtAsunto.setColumns(10);
 
@@ -99,7 +101,7 @@ public class Correo extends JFrame {
 		contentPane.add(btnVolver);
 
 		btnPersonas = new JButton("+");
-		btnPersonas.setBounds(465, 53, 46, 23);
+		btnPersonas.setBounds(610, 82, 41, 18);
 		contentPane.add(btnPersonas);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -111,7 +113,7 @@ public class Correo extends JFrame {
 
 		modelo=new DefaultListModel<String>();
 		lstPersonas.setModel(modelo);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("LISTA DE NOMBRES:");
 		lblNewLabel_5.setBounds(505, 86, 162, 14);
 		contentPane.add(lblNewLabel_5);
@@ -150,12 +152,13 @@ public class Correo extends JFrame {
 				ArrayPersonas=gestion.getArrayPersonas();
 				for (Persona persona : ArrayPersonas) {
 					modelo.addElement(persona.getNombre());
-					
+
 					btnPersonas.setEnabled(false);
 				}
 
 			}
 		});
+		//PARA CERRAR SOLO UNA VENTANA 
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -163,6 +166,25 @@ public class Correo extends JFrame {
 				gestion.setVisible(true);
 			}
 
+		});
+		//LISTA DE CORREO, EVENTO PARA CUANDO HACES DOBLE CLICK
+		lstPersonas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// CUANDO EL USUARIO CLICKE EN LA LISTA EL NOMBRE SELECCIONADO, ESE ELEMENTO SE PONGA AUTOMATICAMENTE EN
+				// EL TEXTFIELD DE TXTPARA
+				if (e.getClickCount() == 2 && !lstPersonas.isSelectionEmpty()) {
+					if (!txtPara.getText().contains(ArrayPersonas.get(lstPersonas.getSelectedIndex()).getMail())) {
+
+						if (txtPara.getText().equals("")) {
+							txtPara.setText(txtPara.getText()+";"+ArrayPersonas.get(lstPersonas.getSelectedIndex()).getMail());
+						}else {
+							txtPara.setText (ArrayPersonas.get(lstPersonas.getSelectedIndex()).getMail());
+						}
+
+					}
+				}
+			}
 		});
 	}
 }
