@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.DriverManager;
 import java.awt.event.ActionEvent;
 
 public class Socios extends JFrame {
@@ -53,7 +54,7 @@ public class Socios extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Numero socio:");
-		lblNewLabel.setBounds(73, 104, 80, 14);
+		lblNewLabel.setBounds(73, 104, 104, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nombre:");
@@ -69,22 +70,22 @@ public class Socios extends JFrame {
 		contentPane.add(lblNewLabel_3);
 		
 		txtNumSocio = new JTextField();
-		txtNumSocio.setBounds(163, 101, 86, 20);
+		txtNumSocio.setBounds(175, 101, 86, 20);
 		contentPane.add(txtNumSocio);
 		txtNumSocio.setColumns(10);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(163, 142, 86, 20);
+		txtNombre.setBounds(175, 142, 86, 20);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtDir = new JTextField();
-		txtDir.setBounds(163, 187, 86, 17);
+		txtDir.setBounds(175, 187, 86, 17);
 		contentPane.add(txtDir);
 		txtDir.setColumns(10);
 		
 		txtTelefono = new JTextField();
-		txtTelefono.setBounds(163, 230, 86, 20);
+		txtTelefono.setBounds(175, 233, 86, 20);
 		contentPane.add(txtTelefono);
 		txtTelefono.setColumns(10);
 		
@@ -117,8 +118,8 @@ public class Socios extends JFrame {
 		contentPane.add(txtRegistro);
 		txtRegistro.setColumns(10);
 		
-		BD=new BaseDatos();
-		
+		BaseDatos bd = new BaseDatos();
+		bd.conectar();
 		registrarEventos();
 	}//FIN DEL CONSTRUCTOR
 	public void registrarEventos(){
