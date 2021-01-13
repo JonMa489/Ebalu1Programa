@@ -318,15 +318,6 @@ public class Gestion extends JFrame {
 
 			}
 		});	
-		//BOTON ENVIAR EMAIL
-		btnEnviar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-
-			}
-		});
 		//BOTON ENVIAR (ABRIR CORREO Y CERRAR LA PESTAÑA PRINCIPAL)
 		btnEnviar.addActionListener(new ActionListener() {
 

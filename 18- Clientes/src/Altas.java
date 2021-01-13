@@ -6,12 +6,15 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import java.awt.GridBagLayout;
 import javax.swing.border.TitledBorder;
 
@@ -25,6 +28,8 @@ public class Altas extends JPanel {
 	private JTextField txtCP;
 	private BaseDeDatos bd;
 	private ResultSet rs;
+	private Apellidos apellidos = null;
+	private int activado;
 
 	/**
 	 * Create the panel.
@@ -104,42 +109,35 @@ public class Altas extends JPanel {
 		txtCP = new JTextField();
 		SegundaFila.add(txtCP);
 		txtCP.setColumns(10);
-		inicializar();
-		registrarEventos ();
-	}
+		
+		registrarEventos();
+	}//FIN DEL CONSTRUCTOR
+	//REGISTRAR EVENTOS
 	public void registrarEventos() {
-	txtApellidos.addMouseListener(new MouseListener() {
+		//APELLIDOS
+		txtApellidos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (activado == 0) {
+					apellidos = new Apellidos(Altas.this);
+					apellidos.setVisible(true);
+					activado=1;
+					//apellidos.setActivado(1);
+					//Altas.this.setVisible(false);
+				}
+
+			}
+		});
 		
-		@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-	});
+		//NOMBRE
+		txtNombre.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+
+			}
+		});
 	}
 	public void inicializar () {
 		bd= new BaseDeDatos ();
@@ -152,8 +150,6 @@ public class Altas extends JPanel {
 		txtNumero.setText("");
 		txtCP.setText("");
 	}
+
 	
-	public String coma () {
-		return ",";
-	}
 }
