@@ -39,7 +39,7 @@ public class BaseDatos {
 	public int obtenerMaxNumSocio () {
 		String sent; 
 		ResultSet rs;
-		sent="SELECT max(numSocio) FROM socios";
+		sent="SELECT max(id_socios) FROM socios";
 		try {
 			sentencia=cn.prepareStatement(sent);
 			rs=sentencia.executeQuery();
@@ -50,5 +50,34 @@ public class BaseDatos {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	public int ejecutarSQL (String sent) { //VALE PARA AÑADIR, MODIFICAR Y ELIMINAR
+		int regAffec=0;
+		try {
+			sentencia=cn.prepareStatement(sent);
+			regAffec=sentencia.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 1;
+	}
+	public int editar (String nombre, String direccion, String tlfno, String id_socio) {
+		String sent;
+		
+		try {
+			sent="UPDATE socios SET nombre=?, direccion=?, telefono=? where id_socios=?";
+			sentencia=cn.prepareStatement(sent);
+			sentencia.setString(1, nombre);
+			sentencia.setString(2, direccion);
+			sentencia.setString(3, tlfno);
+			sentencia.setString(4, id_socio);
+			sentencia.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 1;
+	
 	}
 }

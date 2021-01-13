@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ import java.awt.Color;
 public class Socios extends JFrame {
 	public static final int ADD=1;
 	public static final int EDIT=2;
+	public static final int DELETE=3;
 	private JPanel contentPane;
 	private JTextField txtNumSocio;
 	private JTextField txtNombre;
@@ -38,6 +40,7 @@ public class Socios extends JFrame {
 	private JButton btnOk;
 	private JButton btnCancel;
 	private int accion;
+	private JButton btnEliminar;
 
 
 
@@ -86,28 +89,24 @@ public class Socios extends JFrame {
 		contentPane.add(lblNewLabel_3);
 
 		txtNumSocio = new JTextField();
-		txtNumSocio.setEnabled(false);
 		txtNumSocio.setEditable(false);
 		txtNumSocio.setBounds(169, 101, 123, 20);
 		contentPane.add(txtNumSocio);
 		txtNumSocio.setColumns(10);
 
 		txtNombre = new JTextField();
-		txtNombre.setEnabled(false);
 		txtNombre.setEditable(false);
 		txtNombre.setBounds(169, 142, 123, 20);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 
 		txtDir = new JTextField();
-		txtDir.setEnabled(false);
 		txtDir.setEditable(false);
 		txtDir.setBounds(169, 187, 123, 17);
 		contentPane.add(txtDir);
 		txtDir.setColumns(10);
 
 		txtTelefono = new JTextField();
-		txtTelefono.setEnabled(false);
 		txtTelefono.setEditable(false);
 		txtTelefono.setBackground(Color.WHITE);
 		txtTelefono.setBounds(169, 233, 123, 20);
@@ -152,20 +151,26 @@ public class Socios extends JFrame {
 		contentPane.add(btnModificar);
 
 		btnOk = new JButton("S");
+		btnOk.setEnabled(false);
 		btnOk.setBounds(457, 118, 53, 23);
 		contentPane.add(btnOk);
 
 		btnCancel = new JButton("N");
+		btnCancel.setEnabled(false);
 		btnCancel.setBounds(520, 118, 53, 23);
 		contentPane.add(btnCancel);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(324, 180, 123, 23);
+		contentPane.add(btnEliminar);
 
 		inicializar();
 
 		registrarEventos();
 	}//FIN DEL CONSTRUCTOR
+
 	public void registrarEventos(){
 		btnSig.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -178,8 +183,8 @@ public class Socios extends JFrame {
 				}
 			}
 		});
+		
 		btnAnt.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -256,33 +261,137 @@ public class Socios extends JFrame {
 
 			}
 		});
-		btnAnadir.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				txtNumSocio.selectAll();
-
-			}
-		});
+		
 		btnAnadir.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				//JTextField editar
 				estadoTextDatos(true);
+				bd.obtenerDatos();
 				//Vaciar los JTextField
 				txtDir.setText("");
 				txtNombre.setText("");
 				txtTelefono.setText("");
-				
 
+				//PONER NUMER DE SOCIO: +1 DEL QUE AHORA ES EL MAX
 				txtNumSocio.setText(bd.obtenerMaxNumSocio()+1+"");
 				//Foco a jtextnombre
+				txtNombre.requestFocus();
 				//Accion: ADD
-				//PONER NUMER DE SOCIO: +1 DEL QUE AHORA ES EL MAX
+				accion= ADD;
 				//ACTIVAR DOS BOTONES OK-CANCEL
 
+				//DESACTIVAR NUEVO SOCIO Y MODIFICAR
 
+
+			}
+		});
+		btnModificar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//JTextField editar
+				estadoTextDatos(true);
+				//Foco a jtextnombre
+				txtNombre.requestFocus();
+				//Accion: ADD
+				accion= EDIT;
+				//ACTIVAR DOS BOTONES OK-CANCEL
+
+				//DESACTIVAR NUEVO SOCIO Y MODIFICAR
+				
+			}
+		});
+		
+		btnCancel.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				estadoTextDatos(false);
+				mostrarDatos();
+			}
+		});
+		btnOk.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int regAct = 0;
+				try {
+					regAct=rs.getRow();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				//COMPROBAR QUE EL NOMBRE NO ESTE VACIO
+				//SI ESTA VACIO -->JOptionPane y return
+				if (txtNombre.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(Socios.this, "El nombre esta vacio");
+					return;
+				}
+				switch(accion) {
+				case ADD: //LAMAR A UNA FUNCION DE UNA BD QUE RECIBA UNA SENTENCIA SQL
+					if (bd.ejecutarSQL("INSERT INTO socios (nombre,direccion,telefono) VALUES ('"+ txtNombre.getText()+"', '"+ txtDir.getText()+"', '"+ txtTelefono.getText()+"');")==0) {
+						JOptionPane.showMessageDialog(Socios.this, "Error al insertar");
+						estadoTextDatos(false);
+						rs=bd.obtenerDatos();
+					}
+					try {
+						rs.last();
+						numReg=rs.getRow();
+						mostrarDatos();
+						estadoTextDatos(false);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+				case EDIT:
+					if (bd.ejecutarSQL("UPDATE socios SET nombre='"+ txtNombre.getText()+"', direccion='"+txtDir.getText()+"', telefono='"+txtTelefono.getText()+"' WHERE id_socios ='"+txtNumSocio.getText()+"'")== 0) {
+						JOptionPane.showMessageDialog(Socios.this, "Error al modificar");
+					}
+					bd.editar(txtNombre.getText(), txtDir.getText(), txtTelefono.getText(), txtNumSocio.getText());
+					estadoTextDatos(false);
+					rs=bd.obtenerDatos();
+					try {
+						rs.absolute(regAct); //IR AL QUE ERA EL REGISTRO ACTUAL?
+						mostrarDatos();
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+					break;
+				case DELETE:
+					int dialogButton = JOptionPane.showConfirmDialog (Socios.this, "Estas seguro que quieres eliminar este socio?","CUIDADO!", JOptionPane.YES_NO_OPTION);
+					if(dialogButton == JOptionPane.YES_OPTION) {
+						bd.ejecutarSQL("DELETE FROM socios WHERE id_socios = "+txtNumSocio.getText());
+						estadoTextDatos(false);
+						rs=bd.obtenerDatos();
+						try {
+							int regAct1=rs.getRow();
+							rs.first();
+							numReg=rs.getRow();
+							rs.absolute(regAct1);
+							mostrarDatos();
+							estadoTextDatos(false);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					break;
+				}
+			}
+		});
+		btnEliminar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//JTextField editar
+				estadoTextDatos(true);
+				//Accion: ADD
+				accion= DELETE;
+				
 			}
 		});
 	}
@@ -321,8 +430,22 @@ public class Socios extends JFrame {
 		}
 	}
 	public void estadoTextDatos (boolean estado) {
-		txtNombre.setEnabled(estado);
-		txtDir.setEnabled(estado);
-		txtTelefono.setEnabled(estado);
+		txtNombre.setEditable(estado);
+		txtDir.setEditable(estado);
+		txtTelefono.setEditable(estado);
+
+		btnOk.setEnabled(estado);
+		btnCancel.setEnabled(estado);
+
+		btnAnadir.setEnabled(!estado);
+		btnModificar.setEnabled(!estado);
+		btnEliminar.setEnabled(!estado);
+
+		//MODIFUCAR ESTADO DE BOTONES DE MOVIMIENTO
+		btnPrim.setEnabled(!estado);
+		btnAnt.setEnabled(!estado);
+		btnSig.setEnabled(!estado);
+		btnUltimo.setEnabled(!estado);
+		txtRegistro.setEnabled(!estado);
 	}
 }
