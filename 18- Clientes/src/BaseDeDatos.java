@@ -34,4 +34,31 @@ public class BaseDeDatos {
 		}
 		return null;
 	}
+	public int obtenerMaxNumCliente () {
+		String sent; 
+		ResultSet rs;
+		sent="SELECT max(id_cliente) FROM clientes";
+		try {
+			sentencia=cn.prepareStatement(sent);
+			rs=sentencia.executeQuery();
+			rs.first();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	public int ejecutarSQL (String sent) { //VALE PARA AÑADIR, MODIFICAR Y ELIMINAR
+		int regAffec=0;
+		try {
+			sentencia=cn.prepareStatement(sent);
+			regAffec=sentencia.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 1;
+	}
+	
 }

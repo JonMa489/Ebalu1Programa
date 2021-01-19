@@ -10,8 +10,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -30,7 +32,24 @@ public class Altas extends JPanel {
 	private ResultSet rs;
 	private Apellidos apellidos = null;
 	private int activado;
+	private JButton btnLimpiar;
+	private JButton btnAlta;
+	private JTextField txtApellido1;
+	private JTextField txtApellido2;
+	private clientes cliente;
 
+	public JTextField getTxtApellidos() {
+		return txtApellidos;
+	}
+	public void setTxtApellidos(JTextField txtApellidos) {
+		this.txtApellidos = txtApellidos;
+	}
+	public int getActivado() {
+		return activado;
+	}
+	public void setActivado(int activado) {
+		this.activado = activado;
+	}
 	/**
 	 * Create the panel.
 	 */
@@ -41,10 +60,10 @@ public class Altas extends JPanel {
 		add(Botones, BorderLayout.SOUTH);
 		Botones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar = new JButton("Limpiar");
 		Botones.add(btnLimpiar);
 
-		JButton btnAlta = new JButton("Dar de alta");
+		btnAlta = new JButton("Dar de alta");
 		Botones.add(btnAlta);
 
 		JPanel Informacion = new JPanel();
@@ -109,23 +128,21 @@ public class Altas extends JPanel {
 		txtCP = new JTextField();
 		SegundaFila.add(txtCP);
 		txtCP.setColumns(10);
-		
 		registrarEventos();
 	}//FIN DEL CONSTRUCTOR
+	
 	//REGISTRAR EVENTOS
 	public void registrarEventos() {
 		//APELLIDOS
 		txtApellidos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (activado == 0) {
+				if (activado==0) {
 					apellidos = new Apellidos(Altas.this);
 					apellidos.setVisible(true);
-					activado=1;
-					//apellidos.setActivado(1);
 					//Altas.this.setVisible(false);
+					activado=1;
 				}
-
 			}
 		});
 		
@@ -134,11 +151,36 @@ public class Altas extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				Persona p = null;
+				if (!p.nombreCorrecto()) {
+					JOptionPane.showMessageDialog(Altas.this, p.getStrErrorN());
+					txtNombre.requestFocus();
+					txtNombre.selectAll();
+				}
+			}
+		});
+		
+		//BOTON GUARDAR (ALTA)
+		btnAlta.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				estadoTextDatos(true);
+				bd.obtenerDatos();
+				//PONER NUMER DE SOCIO: +1 DEL QUE AHORA ES EL MAX
+				txtClave.setText(bd.obtenerMaxNumCliente()+1+"");
+				txtClave.setEditable(false);
+				txtNombre.requestFocus();
+				if (bd.ejecutarSQL("INSERT INTO clientes (nombre,apellido1,apellido2,edad,calle,codigoPostal) VALUES ('"+ txtNombre.getText()+"', '"+ txtApellido1.getText()+"', '"+ txtApellido2.getText()+"', '"+ txtEdad.getText()+"', '"+ txtCalle.getText()+"', '"+ txtNumero.getText()+"', '"+ txtCP.getText()+"');")==0) {
+					JOptionPane.showMessageDialog(Altas.this, "Error al insertar");
+					estadoTextDatos(false);
+					rs=bd.obtenerDatos();
+				}
 			}
 		});
 	}
+	
+	//AL INICIALIZAR DATOS
 	public void inicializar () {
 		bd= new BaseDeDatos ();
 		bd.conectar();
@@ -149,7 +191,16 @@ public class Altas extends JPanel {
 		txtCalle.setText("");
 		txtNumero.setText("");
 		txtCP.setText("");
+		
+	}
+	public void estadoTextDatos (boolean estado) {
+		txtNombre.setEditable(estado);
+		txtApellidos.setEditable(estado);
+		txtEdad.setEditable(estado);
+		txtCalle.setEditable(estado);
+		txtNumero.setEditable(estado);
+		txtCP.setEditable(estado);
 	}
 
-	
+
 }
