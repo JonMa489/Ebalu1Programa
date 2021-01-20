@@ -30,7 +30,7 @@ public class Apellidos extends JFrame {
 	public Apellidos(Altas altas) {
 		setResizable(false);
 		this.altas=altas;
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 477, 126);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

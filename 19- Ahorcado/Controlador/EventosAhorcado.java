@@ -22,6 +22,8 @@ public EventosAhorcado (Ahorcado ahorcado) {
 			ahorcado.getTeclado().setPalabra(palabra);
 			ahorcado.getTeclado().ponerGuiones();
 			ahorcado.getBtnSiguiente().setEnabled(false);
+			//ACTIVAR TODOS LOS BOTONES DEL TECLADO VIRTUAL
+			ahorcado.getTeclado().estadoBotones(true);
 			
 			//ACTIVAR 
 		}

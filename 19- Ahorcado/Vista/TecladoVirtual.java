@@ -35,6 +35,12 @@ public class TecladoVirtual extends JPanel {
 		//CREAR LA CLASE EventosTeclado PARA GESTIONAR LOS EVENTOS;
 		eventosTeclado = new EventosTeclado(this);
 	}
+	public Ahorcado getAhorcado() {
+		return ahorcado;
+	}
+	public void setAhorcado(Ahorcado ahorcado) {
+		this.ahorcado = ahorcado;
+	}
 	public String getPalabra() {
 		return palabra;
 	}
@@ -77,7 +83,7 @@ public class TecladoVirtual extends JPanel {
 		 * Añadir al panel
 		 * Añadir al array
 		 */
-		int inc;
+		int inc = 0;
 		for (int i = 0; i < arrayTeclado.length; i++) {
 			btnAux=new JButton();
 			if (i==0) {
@@ -92,7 +98,7 @@ public class TecladoVirtual extends JPanel {
 				inc=1;
 				btnAux.setText("Ñ");
 			}else {
-				btnAux.setText((char)('A'+i)+"");
+				btnAux.setText((char)('A'+i-inc)+"");
 			}
 			btnAux.setMargin (new Insets(0,0,0,0));
 			arrayTeclado[i]=btnAux;

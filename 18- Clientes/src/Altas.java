@@ -145,21 +145,6 @@ public class Altas extends JPanel {
 				}
 			}
 		});
-		
-		//NOMBRE
-		txtNombre.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Persona p = null;
-				if (!p.nombreCorrecto()) {
-					JOptionPane.showMessageDialog(Altas.this, p.getStrErrorN());
-					txtNombre.requestFocus();
-					txtNombre.selectAll();
-				}
-			}
-		});
-		
 		//BOTON GUARDAR (ALTA)
 		btnAlta.addActionListener(new ActionListener() {
 

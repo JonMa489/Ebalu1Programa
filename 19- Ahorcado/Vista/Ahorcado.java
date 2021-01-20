@@ -21,6 +21,7 @@ public class Ahorcado extends JFrame {
 	private EventosAhorcado eventosAhorcado;
 	private AreaDibujo areaDibujo;
 	private String Palabra;
+
 	
 
 	/**
