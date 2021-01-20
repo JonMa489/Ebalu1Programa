@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -6,7 +7,7 @@ import javax.swing.JButton;
 public class EventosTeclado {
 	private TecladoVirtual teclado;
 	private Ahorcado ahorcado;
-
+	private int numFallos;
 
 	public EventosTeclado (TecladoVirtual teclado) {
 		this.teclado=teclado;
@@ -43,6 +44,13 @@ public class EventosTeclado {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					jButton.setEnabled(false);
+					//COMPROBAR SI LA LETRA PULSADA NOOO ESTA EN LA PALABRA
+					if (!teclado.getPalabra().contains(jButton.getText())) {
+						jButton.setBackground(Color.red);
+						numFallos++;
+					}else {
+						teclado.getPalabra().indexOf();
+					}
 					
 				}
 			});
