@@ -2,15 +2,20 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import javax.swing.JButton;
+import javax.swing.Timer;
 
 public class EventosTeclado {
 	private TecladoVirtual teclado;
 	private Ahorcado ahorcado;
+	private AreaDibujo areaDibujo;
 	private int numFallos;
-	
+	private Timer reloj;
+
 	public EventosTeclado (TecladoVirtual teclado) {
 		this.teclado=teclado;
+		this.areaDibujo=teclado.getAhorcado().getAreaDibujo();
 		JButton [] arrayTeclado;
 		//REGISTRAR EVENTOS
 		// PARA CADA BOTON:
@@ -51,9 +56,25 @@ public class EventosTeclado {
 					if (!teclado.getPalabra().contains(jButton.getText())) {
 						jButton.setBackground(Color.red);
 						numFallos++;
+						areaDibujo.setNumFallos(numFallos);
+						areaDibujo.repaint();
 						//ACTUALIZAR EN CANVAS
 						if (numFallos==7) {
 							teclado.estadoBotones(false);
+							//HACER CAER EL AHORCADO POCO A POCO;
+							//ACTIVAR UN TIMER
+							reloj=new Timer(40, new ActionListener() {
+
+								@Override
+								public void actionPerformed(ActionEvent arg0) {
+									areaDibujo.bajar();
+									areaDibujo.repaint();
+									if (areaDibujo.getDesp()>=410) {
+										reloj.stop();
+									}
+								}
+							});
+							reloj.start();
 							//activar boton siguiente
 							teclado.getAhorcado().getBtnSiguiente().setEnabled(true);
 							numFallos=0;

@@ -51,6 +51,11 @@ public class Ahorcado extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		areaDibujo=new AreaDibujo();
+		areaDibujo.setBounds(0,0,450,600);
+		areaDibujo.setBackground(Color.yellow);
+		contentPane.add(areaDibujo, BorderLayout.EAST);
 
 		JLabel lblNewLabel = new JLabel("JUEGO DEL AHORCADO");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -69,10 +74,7 @@ public class Ahorcado extends JFrame {
 		teclado.ponerGuiones();
 		eventosAhorcado=new EventosAhorcado(this);
 
-		areaDibujo=new AreaDibujo();
-		areaDibujo.setBounds(0,0,450,600);
-		areaDibujo.setBackground(Color.yellow);
-		contentPane.add(areaDibujo, BorderLayout.EAST);
+		
 	}
 
 	public JButton getBtnSiguiente() {

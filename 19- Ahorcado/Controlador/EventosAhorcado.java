@@ -24,8 +24,10 @@ public EventosAhorcado (Ahorcado ahorcado) {
 			ahorcado.getBtnSiguiente().setEnabled(false);
 			//ACTIVAR TODOS LOS BOTONES DEL TECLADO VIRTUAL
 			ahorcado.getTeclado().estadoBotones(true);
-			
-			//ACTIVAR 
+			//INICIALIZAR EL CANVAS
+			ahorcado.getAreaDibujo().setNumFallos(0);
+			ahorcado.getAreaDibujo().repaint();
+			ahorcado.getAreaDibujo().setDesp(0);
 		}
 	});
 }
