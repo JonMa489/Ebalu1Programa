@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 public class Circulo {
@@ -10,25 +11,49 @@ public class Circulo {
 	private int ancho, alto; //TAMAÑO
 	private String letra;
 	private Color color;
-	
+	//PARA GESTIONAR EMPAREJAMIENTOS
+	private boolean emparejado;
+	private Cuadrado pareja;
+
 	public Circulo() {
 		posX=0;
 		posY=0;
 		ancho=10;
 		alto=10;
 		letra="A";
-		color=Color.BLUE;
+		color=Color.ORANGE;
+		emparejado=false;
+		pareja=null;
 	}
-	
+
+
+
 	public Circulo(int posX, int posY, int ancho, int alto) {
 		this.posX=posX;
 		this.posY=posY; 
 		this.ancho=ancho;
 		this.alto= alto;
-		this.color=Color.BLUE;
+		this.color=Color.ORANGE;
 		this.letra="";
+		emparejado=false;
+		pareja=null;
 	}
 	//CONSTRUCTOR
+	public boolean isEmparejado() {
+		return emparejado;
+	}
+
+	public void setEmparejado(boolean emparejado) {
+		this.emparejado = emparejado;
+	}
+
+	public Cuadrado getPareja() {
+		return pareja;
+	}
+
+	public void setPareja(Cuadrado pareja) {
+		this.pareja = pareja;
+	}
 
 	public int getPosX() {
 		return posX;
@@ -89,7 +114,11 @@ public class Circulo {
 		FontMetrics fm=g.getFontMetrics();
 		Rectangle2D r;
 		r=fm.getStringBounds(letra,g);
-		
+
 		g.drawString(letra,(int) (posX+ancho/2-r.getWidth()/2),(int)(posY+alto/2+r.getHeight()/2-2));
 	}
+	public Rectangle getRect() {
+		Rectangle r;
+		return r=new Rectangle(getPosX(),getPosY(),getAncho(),getAlto());
+	};
 }
