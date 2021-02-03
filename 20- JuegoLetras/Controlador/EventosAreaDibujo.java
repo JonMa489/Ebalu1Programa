@@ -1,19 +1,40 @@
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.Timer;
+
 public class EventosAreaDibujo {
 	private AreaDibujo areaDibujo;
 	private Cuadrado cuadSeleccionado;
 	private Circulo circColisionado;
+	
 	private int despX,despY;
 	public EventosAreaDibujo (AreaDibujo areaDibujo) {
 		this.areaDibujo=areaDibujo;
 		cuadSeleccionado=null;
+		
+		areaDibujo.setReloj(new Timer(40,new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//MOVER EL CIRCULO Y EL CUADRADO
+				areaDibujo.getCirc().mover();
+				areaDibujo.getCuad().mover();
+				//COMPROBAR COLISIONES CON LOS LATERALES PARA CAMBIAR SU DIRECCION
+				
+				//COMPROBAR COLISIONES ENTRE LAS LETRAS PARA FINALIZAR LA ANIMACION
+				areaDibujo.repaint();
+				
+			}
+
+		}));
 		areaDibujo.addMouseListener(new MouseAdapter() {
 
 			@Override

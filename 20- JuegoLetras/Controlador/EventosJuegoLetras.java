@@ -32,6 +32,8 @@ public class EventosJuegoLetras {
 				juegoLetras.getAreaDibujo().repaint();
 				
 				juegoLetras.estadoBotones(false);
+				
+				juegoLetras.getAreaDibujo().getReloj().stop();
 			}
 		});
 		this.juegoLetras.getBtnComprobar().addActionListener(new ActionListener() {

@@ -11,6 +11,8 @@ public class Circulo {
 	private int ancho, alto; //TAMAÑO
 	private String letra;
 	private Color color;
+	//PARA OBJETOS QUE SE MUEVEN SOLOS
+	private int dirH,dirV, velocidad;
 	//PARA GESTIONAR EMPAREJAMIENTOS
 	private boolean emparejado;
 	private Cuadrado pareja;
@@ -120,5 +122,30 @@ public class Circulo {
 	public Rectangle getRect() {
 		Rectangle r;
 		return r=new Rectangle(getPosX(),getPosY(),getAncho(),getAlto());
+	}
+	public void mover() {
+		//CALCULA LAS NUEVAS COORDENADAS A LAS QUE SE VA A MOVER
+		setPosX(getPosX()+getDirH()*getVelocidad());
+		setPosY(getPosY()+getDirV()*getVelocidad());
+	}
+	
+	
+	public int getDirH() {
+		return dirH;
+	}
+	public void setDirH(int dirH) {
+		this.dirH = dirH;
+	}
+	public int getDirV() {
+		return dirV;
+	}
+	public void setDirV(int dirV) {
+		this.dirV = dirV;
+	}
+	public int getVelocidad() {
+		return velocidad;
+	}
+	public void setVelocidad(int velocidad) {
+		this.velocidad = velocidad;
 	};
 }

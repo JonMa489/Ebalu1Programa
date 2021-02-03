@@ -1,8 +1,13 @@
 import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.Timer;
+
 
 public class AreaDibujo extends Canvas{
 	public static final int FACIL=1;
@@ -10,12 +15,36 @@ public class AreaDibujo extends Canvas{
 	public static final int DIFICIL=3;
 	public static final int SEP=80;
 	private int nivel;
+	//PARA EL MENSAJE FINAL DE PANTALLLA
 	private int aciertos,fallos;
 	private EventosAreaDibujo eventosAreaDibujo;
+	public Timer getReloj() {
+		return reloj;
+	}
+	public void setReloj(Timer timer) {
+		this.reloj = timer;
+	}
+	public Circulo getCirc() {
+		return circ;
+	}
+	public void setCirc(Circulo circ) {
+		this.circ = circ;
+	}
+	public Cuadrado getCuad() {
+		return cuad;
+	}
+	public void setCuad(Cuadrado cuad) {
+		this.cuad = cuad;
+	}
 	//PARA EL DOBLE BUFFER
 	private Image buffer;
 	private Graphics pantVirtual;
-
+	
+	//PARA LA ANIMACION INICIAL
+	private Timer reloj;
+	private Circulo circ;
+	private Cuadrado cuad;
+	
 	public int getNivel() {
 		return nivel;
 	}
@@ -28,6 +57,17 @@ public class AreaDibujo extends Canvas{
 	private Cuadrado[] arrayCuadrado;
 	public AreaDibujo (JuegoLetras juegoLetras) {
 		this.juegoLetras=juegoLetras;
+		//CREAR EL CIRCULO Y EL CUADRADO PARA LA ANIMACION
+		circ=new Circulo(0,0,80,80);
+		circ.setDirH(1);
+		circ.setDirV(1);
+		circ.setVelocidad(1);
+		
+		cuad=new Cuadrado(0,700,80,80);
+		cuad.setDirH(1);
+		cuad.setDirV(-1);
+		cuad.setVelocidad(2);
+		
 		eventosAreaDibujo=new EventosAreaDibujo(this);
 		aciertos=0;
 		fallos=0;
@@ -134,8 +174,7 @@ public class AreaDibujo extends Canvas{
 	public void paint(Graphics g) {
 		// DIBUJAR TODOS LOS ELEMENTOS DE LA PARTE GRAFICA
 		super.paint(g);
-		if (arrayCirculos!=null) {
-			
+		if (arrayCirculos!=null) {//CUANDO COMIENZA EL JUEGO
 			for (Circulo circulo : arrayCirculos) {
 				circulo.dibujar(g);
 			}
@@ -143,7 +182,17 @@ public class AreaDibujo extends Canvas{
 				cuadrado.dibujar(g);
 			}
 			//SI ES EL FINAL, MOSTRAR UN MENSAJE DE ACIERTOS Y FALLOS
-			
+			if (aciertos!=0 || fallos!=0) {
+				g.setColor(Color.black);
+				g.setFont(new Font("Arial", Font.PLAIN, 60));
+				g.drawString("ACIERTOS: "+aciertos, 100, 550);
+				g.drawString("FALLOS:  "+fallos, 100, 700);
+				setAciertos(0);
+				setFallos(0);
+			}
+		}else {//PARA LA ANIMACION INICIAL
+			circ.dibujar(g);
+			cuad.dibujar(g);
 		}
 	}
 	@Override
