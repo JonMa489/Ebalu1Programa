@@ -61,12 +61,13 @@ public class AreaDibujo extends Canvas{
 		circ=new Circulo(0,0,80,80);
 		circ.setDirH(1);
 		circ.setDirV(1);
-		circ.setVelocidad(1);
+		circ.setLetra("A");
+		circ.setVelocidad(6);
 		
 		cuad=new Cuadrado(0,700,80,80);
 		cuad.setDirH(1);
 		cuad.setDirV(-1);
-		cuad.setVelocidad(2);
+		cuad.setVelocidad(10);
 		
 		eventosAreaDibujo=new EventosAreaDibujo(this);
 		aciertos=0;

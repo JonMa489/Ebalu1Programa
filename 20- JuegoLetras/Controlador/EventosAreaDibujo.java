@@ -14,27 +14,79 @@ public class EventosAreaDibujo {
 	private AreaDibujo areaDibujo;
 	private Cuadrado cuadSeleccionado;
 	private Circulo circColisionado;
-	
+
 	private int despX,despY;
 	public EventosAreaDibujo (AreaDibujo areaDibujo) {
 		this.areaDibujo=areaDibujo;
 		cuadSeleccionado=null;
-		
+
 		areaDibujo.setReloj(new Timer(40,new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				Circulo circ=areaDibujo.getCirc();
+				Cuadrado cuad=areaDibujo.getCuad();
 				//MOVER EL CIRCULO Y EL CUADRADO
-				areaDibujo.getCirc().mover();
-				areaDibujo.getCuad().mover();
+				circ.mover();
+				cuad.mover();
+
 				//COMPROBAR COLISIONES CON LOS LATERALES PARA CAMBIAR SU DIRECCION
-				
+				//ABAJO
+				if (circ.getPosY()+circ.getAlto()>=areaDibujo.getHeight()) {
+					circ.setDirV(-1);
+				}
+				//DERECHA
+				if (circ.getPosX()+circ.getAncho()>=areaDibujo.getWidth()) {
+					circ.setDirH(-1);
+				}
+				//IZQUIERDA
+				if (circ.getPosX()<=0) {
+					circ.setDirH(1);
+				}
+				//ARRIBA
+				if (circ.getPosY()<=0) {
+					circ.setDirV(1);
+				}
+				//ABAJO
+				if (cuad.getPosY()+cuad.getAlto()>=areaDibujo.getHeight()) {
+					cuad.setDirV(-1);
+				}
+				//DERECHA
+				if (cuad.getPosX()+cuad.getAncho()>=areaDibujo.getWidth()) {
+					cuad.setDirH(-1);
+				}
+				//IZQUIERDA
+				if (cuad.getPosX()<=0) {
+					cuad.setDirH(1);
+				}
+				//ARRIBA
+				if (cuad.getPosY()<=0) {
+					cuad.setDirV(1);
+				}
+
 				//COMPROBAR COLISIONES ENTRE LAS LETRAS PARA FINALIZAR LA ANIMACION
+				if (circ.getRect().intersects(cuad.getRect())) {
+					circ.setDirH(0);
+					circ.setDirV(0);
+					cuad.setDirH(0);
+					cuad.setDirV(0);
+					circ.setAlto(circ.getAlto()+5);
+					circ.setAncho(circ.getAncho()+5);
+					cuad.setAlto(cuad.getAlto()+5);
+					cuad.setAncho(cuad.getAncho()+5);
+					if (circ.getAlto()>=120) {
+						areaDibujo.getReloj().stop();
+					}
+
+				}
+
 				areaDibujo.repaint();
-				
+
 			}
 
 		}));
+		areaDibujo.getReloj().start(); //INICIAR EL RELOJ
+
 		areaDibujo.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -54,7 +106,7 @@ public class EventosAreaDibujo {
 						//COLOCAR EL CUADRADO DEBAJO
 						cuadSeleccionado.setPosX(circColisionado.getPosX());
 						cuadSeleccionado.setPosY(circColisionado.getPosY()+AreaDibujo.SEP*3/4);
-						
+
 						//SI ESTAN TODOS EMPAREJADOS, ACTIVAR EL BOTON COMPROBAR
 						boolean todosEmparejados=true;
 						for (Circulo circ : areaDibujo.getArrayCirculos()) {
@@ -77,15 +129,17 @@ public class EventosAreaDibujo {
 				// TODO Auto-generated method stub
 				Rectangle rMouse, rCuad;
 				rMouse=new Rectangle(e.getX(), e.getY(), 1, 1);
-				for (Cuadrado c : areaDibujo.getArrayCuadrado()) {
-					rCuad=c.getRect();
-					// SI COLISIONA EL CUADRADO ACTUALm, GUARDARLO EN UNA VARIABLE
-					if (rMouse.intersects(rCuad) && !c.isEmparejado()) {
-						cuadSeleccionado=c;
-						//OBTENER EL DESPLAZAMIENTO EN X Y EN Y  DEL RATON RESPECTO AL COMIENZO
-						despX=e.getX()-c.getPosX();
-						despY=e.getY()-c.getPosY();
-						break;
+				if (areaDibujo.getArrayCuadrado()!=null) {
+					for (Cuadrado c : areaDibujo.getArrayCuadrado()) {
+						rCuad=c.getRect();
+						// SI COLISIONA EL CUADRADO ACTUALm, GUARDARLO EN UNA VARIABLE
+						if (rMouse.intersects(rCuad) && !c.isEmparejado()) {
+							cuadSeleccionado=c;
+							//OBTENER EL DESPLAZAMIENTO EN X Y EN Y  DEL RATON RESPECTO AL COMIENZO
+							despX=e.getX()-c.getPosX();
+							despY=e.getY()-c.getPosY();
+							break;
+						}
 					}
 				}
 			}
